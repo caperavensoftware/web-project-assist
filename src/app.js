@@ -1,5 +1,14 @@
+import {inject} from 'aurelia-framework';
+import {WebProject} from "./lib/web-project";
+
+@inject(WebProject)
 export class App {
     router = null;
+    project = null;
+
+    constructor(webProject) {
+        this.project = webProject;
+    }
 
     configureRouter(config, router) {
         config.title = 'Web Project Assist';
