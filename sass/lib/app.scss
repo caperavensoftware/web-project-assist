@@ -25,5 +25,7 @@
 .application-body {
   @include flex();
   @include flex-column();
-  @include fullsize();
+
+  width: 100%;
+  height: 100%;
 }

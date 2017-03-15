@@ -56,3 +56,10 @@ body {
 .default-padding-right {
   padding-right: $default-padding;
 }
+
+.align-items-right {
+  @include flex();
+  @include flex-row();
+
+  justify-content: flex-end;
+}

@@ -6,6 +6,7 @@ import {PackageJson} from './package.json';
 export class WebProject {
     errors;
     currentProjectPath;
+    packageJson;
 
     get name() {
         if (this.packageJson.packageObject) {

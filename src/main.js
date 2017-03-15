@@ -6,6 +6,7 @@ export function configure(aurelia) {
             .globalResources(
                 'pragma-menu/pragma-menu',
                 'components/main-menu/main-menu',
+                'components/input-composite/input-composite'
             );
 
         aurelia.start().then(() => {

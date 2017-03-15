@@ -4,6 +4,7 @@
 router-view {
   @include stretch();
   overflow: auto;
+  padding: $router-view-padding;
 }
 
 .application-layout {
