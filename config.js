@@ -4,7 +4,8 @@ System.config({
   transpiler: false,
   paths: {
     "*": "app/src/*",
-    "npm:*": "jspm_packages/npm/*"
+    "npm:*": "jspm_packages/npm/*",
+    "github:*": "jspm_packages/github/*"
   },
   bundles: {
     "vendor-build.js": [
@@ -94,6 +95,7 @@ System.config({
     "aurelia-framework": "npm:aurelia-framework@1.0.8",
     "aurelia-pal-browser": "npm:aurelia-pal-browser@1.1.0",
     "pragma-menu": "npm:pragma-menu@1.0.16",
+    "text": "github:systemjs/plugin-text@0.0.9",
     "npm:aurelia-binding@1.1.1": {
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
       "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
