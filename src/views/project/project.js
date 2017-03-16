@@ -2,15 +2,27 @@ import {ViewBase} from './../view-base';
 import {generateClass, generateComponent, generateView} from './../../lib/code-gen';
 
 export class Project extends ViewBase {
+
+    constructor(element, webProject) {
+        super(element, webProject);
+
+        this.model = new ProjectModel();
+    }
+
     createClass() {
-        generateClass("myClass", "lib", this.webProject.currentProjectPath);
+        generateClass(this.model.name, this.model.path, this.webProject.currentProjectPath);
     }
 
     createComponent() {
-        generateComponent("myComponent", this.webProject.currentProjectPath)
+        generateComponent(this.model.name, this.webProject.currentProjectPath)
     }
 
     createView() {
-        generateView("myView", this.webProject.currentProjectPath)
+        generateView(this.model.name, this.webProject.currentProjectPath)
     }
+}
+
+class ProjectModel {
+    name = "newItem";
+    path = "lib";
 }

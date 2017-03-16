@@ -1,6 +1,17 @@
 <template>
     <div>Project</div>
-    <button click.delegate="createClass()">Class</button>
-    <button click.delegate="createComponent()">Component</button>
-    <button click.delegate="createView()">View</button>
+
+    <input-composite id="itemName" label="Name" isRequired="true">
+        <input type="text" value.bind="model.name" autofocus/>
+    </input-composite>
+
+    <input-composite id="itemPath" label="Path" isRequired="true">
+        <input type="text" value.bind="model.path" />
+    </input-composite>
+
+    <div class="align-items-right default-padding-right">
+        <button click.delegate="createClass()">Class</button>
+        <button click.delegate="createComponent()">Component</button>
+        <button click.delegate="createView()">View</button>
+    </div>
 </template>
