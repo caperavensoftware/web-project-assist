@@ -10,6 +10,9 @@
 
             <router-view></router-view>
         </div>
+
+        <assistant ref="assistant" isOpen.bind="webProject.isMenuVisible">
+        </assistant>
     </div>
 
     <div id="menu-background" aria-hidden="true"></div>
