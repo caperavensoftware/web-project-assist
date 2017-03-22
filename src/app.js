@@ -5,10 +5,10 @@ import {menuItems, quickItems} from './menu-items';
 @inject(WebProject)
 export class App {
     router = null;
-    project = null;
+    webProject = null;
 
     constructor(webProject) {
-        this.project = webProject;
+        this.webProject = webProject;
         this.menuItems = menuItems;
         this.quickItems = quickItems;
     }

@@ -5,6 +5,7 @@ import {WebProject} from './../../lib/web-project';
 export class Welcome {
     constructor(webProject) {
         this.webProject = webProject;
+        this.webProject.isMenuVisible = false;
     }
 
     openFolder() {

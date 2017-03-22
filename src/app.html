@@ -5,7 +5,7 @@
     <div class="application-layout">
         <div class="application-body">
             <div class="app-toolbar">
-                <h3>${router.title} - ${project.name}</h3>
+                <h3>${router.title} - ${webProject.name}</h3>
             </div>
 
             <router-view></router-view>
@@ -13,5 +13,5 @@
     </div>
 
     <div id="menu-background" aria-hidden="true"></div>
-    <menu menu-items.bind="menuItems" quick-items.bind="quickItems"></menu>
+    <menu menu-items.bind="menuItems" quick-items.bind="quickItems" class.bind="webProject.isMenuVisible ? '' : 'hidden'"></menu>
 </template>

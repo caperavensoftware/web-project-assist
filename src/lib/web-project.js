@@ -7,6 +7,7 @@ export class WebProject {
     errors;
     currentProjectPath;
     packageJson;
+    isMenuVisible;
 
     get name() {
         if (this.packageJson.packageObject) {
@@ -21,6 +22,7 @@ export class WebProject {
     constructor(router, packageJson) {
         this.router = router;
         this.packageJson = packageJson;
+        this.isMenuVisible = true;
     }
 
     selectFolder() {

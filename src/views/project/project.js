@@ -2,11 +2,11 @@ import {ViewBase} from './../view-base';
 import {generateClass, generateComponent, generateView} from './../../lib/code-gen';
 
 export class Project extends ViewBase {
-
     constructor(element, webProject) {
         super(element, webProject);
 
         this.model = new ProjectModel();
+        this.webProject.isMenuVisible = true;
     }
 
     createClass() {
