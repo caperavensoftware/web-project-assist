@@ -13,6 +13,11 @@ export const menuItems = [
         id: 2,
         text: "Project",
         screen: "project"
+    },
+    {
+        id: 3,
+        text: "Screen Template",
+        screen: "screen-templates"
     }
 ];
 

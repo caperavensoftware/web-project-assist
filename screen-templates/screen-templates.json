@@ -1,0 +1,50 @@
+{
+  "type": "views",
+  "fields": [
+
+  ],
+  "body": {
+    "elements": [
+      {
+        "element": "div",
+        "styles": ["fullsize", "container", "horizontal"],
+        "elements": [
+          {
+            "element": "div",
+            "content": "Preview Template",
+            "attributes": {
+              "id": "previewElement",
+              "ref": "previewElement"
+            },
+            "styles": ["stretch"]
+          },
+          {
+            "element": "div",
+            "attributes": {
+              "id": "preview"
+            },
+            "styles": ["stretch, container, vertical"],
+            "elements": [
+              {
+                "element": "div",
+                "styles": ["toolbar"],
+                "elements": [
+                  {
+                    "element": "button",
+                    "title": "Preview",
+                    "action": "preview"
+                  }
+                ]
+              },
+              {
+                "element": "textarea",
+                "field": "templateText",
+                "styles": ["stretch"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

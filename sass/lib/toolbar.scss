@@ -1,0 +1,5 @@
+.toolbar {
+  @include flex();
+  @include flex-row();
+  align-items: center;
+}
