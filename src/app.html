@@ -1,4 +1,7 @@
 <template>
+    <require from="./components/icons/icons.html"></require>
+    <icons></icons>
+
     <div class="application-layout">
         <div class="application-body">
             <div class="app-toolbar">
@@ -10,5 +13,5 @@
     </div>
 
     <div id="menu-background" aria-hidden="true"></div>
-    <main-menu></main-menu>
+    <menu menu-items.bind="menuItems" quick-items.bind="quickItems"></menu>
 </template>

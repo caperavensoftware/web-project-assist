@@ -5,8 +5,9 @@ export function configure(aurelia) {
             .developmentLogging()
             .globalResources(
                 'pragma-menu/pragma-menu',
-                'components/main-menu/main-menu',
-                'components/input-composite/input-composite'
+                'pragma-views/components/icons/icon.html',
+                'pragma-views/components/menu/menu',
+                'pragma-views/components/input-composite/input-composite'
             );
 
         aurelia.start().then(() => {

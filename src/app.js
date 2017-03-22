@@ -1,5 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {WebProject} from "./lib/web-project";
+import {menuItems, quickItems} from './menu-items';
 
 @inject(WebProject)
 export class App {
@@ -8,6 +9,8 @@ export class App {
 
     constructor(webProject) {
         this.project = webProject;
+        this.menuItems = menuItems;
+        this.quickItems = quickItems;
     }
 
     configureRouter(config, router) {

@@ -25,6 +25,7 @@
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0",
       "aurelia-framework": "npm:aurelia-framework@^1.0.1",
       "pragma-menu": "npm:pragma-menu@^1.0.16",
+      "pragma-views": "npm:pragma-views@^0.0.4",
       "text": "github:systemjs/plugin-text@^0.0.9"
     },
     "devDependencies": {}
