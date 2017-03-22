@@ -25,6 +25,14 @@ export class ScreenTemplates {
         });
     }
 
+    detached() {
+        if (this.previewElement) {
+            this.dynamicViewLoader.disposeFor(this.previewElement)
+        };
+
+        this.dynamicViewLoader.disposeFor(this.genContainer);
+    }
+
     preview() {
         this.templateParser.parse(JSON.parse(this.model.templateText)).then(result => {
             this.dynamicViewLoader.load(result, this.previewElement, this);

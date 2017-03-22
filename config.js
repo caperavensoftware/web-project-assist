@@ -97,7 +97,7 @@ System.config({
     "aurelia-framework": "npm:aurelia-framework@1.1.0",
     "aurelia-pal-browser": "npm:aurelia-pal-browser@1.1.0",
     "pragma-menu": "npm:pragma-menu@1.0.16",
-    "pragma-views": "npm:pragma-views@0.0.6",
+    "pragma-views": "npm:pragma-views@0.0.7",
     "text": "github:systemjs/plugin-text@0.0.9",
     "npm:aurelia-binding@1.2.0": {
       "aurelia-logging": "npm:aurelia-logging@1.3.0",
@@ -214,7 +214,7 @@ System.config({
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0"
     },
-    "npm:pragma-views@0.0.6": {
+    "npm:pragma-views@0.0.7": {
       "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
       "pragma-menu": "npm:pragma-menu@1.0.16"
     }

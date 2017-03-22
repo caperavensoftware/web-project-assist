@@ -10,7 +10,7 @@ export class Project extends ViewBase {
     }
 
     attached() {
-        const html = '<button click.delegate="sayHello()">Click Me</button>'
+        const html = '<button click.delegate="sayHello()">Click Me</button>';
 
         this.eventAggregator.publish("assistant", {
             view: html,
