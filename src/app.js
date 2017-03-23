@@ -11,6 +11,7 @@ export class App {
         this.webProject = webProject;
         this.menuItems = menuItems;
         this.quickItems = quickItems;
+        global.applicationPath = process.cwd();
     }
 
     configureRouter(config, router) {

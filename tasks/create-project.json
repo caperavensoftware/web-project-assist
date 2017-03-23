@@ -1,0 +1,35 @@
+{
+  "name": "Create Project",
+  "tasks": [
+    {
+      "command": "npm init -y",
+      "description": "initialize npm"
+    },
+    {
+      "command": "npm install build-utilities --save-dev",
+      "description": "install build-utilities"
+    },
+    {
+      "task": "template",
+      "source": "project/gulpfile.js.template",
+      "target": "gulpfile.js",
+      "description": "set up gulpfile"
+    },
+    {
+      "command": "gulp init-project",
+      "description": "initialize project"
+    },
+    {
+      "command": "git init",
+      "description": "initialize git"
+    },
+    {
+      "command": "git add -A && git commit -m 'Initial'",
+      "description": "add git files"
+    },
+    {
+      "command": "gulp build:all",
+      "description": "building project"
+    }
+  ]
+}

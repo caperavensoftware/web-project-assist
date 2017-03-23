@@ -1,5 +1,5 @@
 <template>
-    <div class="group">
+    <div class="group" if.bind="!processRunning">
         <h3>Create new project options</h3>
 
         <input-composite id="currentPath" label="Path">
@@ -14,5 +14,9 @@
             <button click.delegate="cancel()">Cancel</button>
             <button click.delegate="createProject()">Create Project</button>
         </div>
+    </div>
+
+    <div class="group" if.bind="processRunning">
+        <div>${description}</div>
     </div>
 </template>

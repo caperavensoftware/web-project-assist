@@ -15,7 +15,7 @@ export class WebProject {
         }
         else
         {
-            return "not selected";
+            return this.getFolderName();
         }
     }
 
@@ -34,7 +34,7 @@ export class WebProject {
             return false;
         }
 
-        this.currentProjectPath = folder;
+        this.currentProjectPath = folder[0];
 
         if (this.packageJson.load(this.currentProjectPath)) {
             this.router.navigate("project");
@@ -42,6 +42,22 @@ export class WebProject {
         else {
             this.router.navigate("new-project");
         }
+    }
+
+    getFolderName() {
+        if (!this.currentProjectPath) {
+            return "";
+        }
+
+        const paths = this.currentProjectPath.split('/');
+        const folder = paths[paths.length -1];
+
+        if (folder.indexOf(" ") > -1) {
+            console.error("folder names may not have spaces");
+            this.events.emit("show-errors", "folder names may not have spaces");
+        }
+
+        return folder;
     }
 
 }
