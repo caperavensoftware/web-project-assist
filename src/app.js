@@ -12,6 +12,7 @@ export class App {
         this.menuItems = menuItems;
         this.quickItems = quickItems;
         global.applicationPath = process.cwd();
+        console.log(`electron: ${process.versions.electron}`);
     }
 
     configureRouter(config, router) {
