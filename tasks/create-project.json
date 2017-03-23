@@ -7,7 +7,7 @@
     },
     {
       "command": "npm install build-utilities --save-dev",
-      "description": "install build-utilities"
+      "description": "install build-utilities, this make take some time"
     },
     {
       "task": "template",
