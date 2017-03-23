@@ -21,7 +21,7 @@ export class TaskRunner {
             i++;
 
             if (i > tasks.length - 1) {
-                return;
+                return self.eventEmitter.emit("done");
             }
 
             const task = tasks[i];

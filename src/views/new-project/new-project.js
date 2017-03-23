@@ -45,7 +45,6 @@ export class NewProject extends ViewBase {
     }
 
     done() {
-        console.log("done");
-        // this.router.navigateToRoute("project");
+        this.router.navigateToRoute("project");
     }
 }
