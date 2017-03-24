@@ -1,13 +1,15 @@
-const exec = require('child_process').exec;
+const childProcess = require("child_process");
 const fs = require("fs");
 
 export class TaskRunner {
     constructor(path, eventEmitter) {
         this.path = path;
         this.eventEmitter = eventEmitter;
+        process.env.PATH += `:${this.path}`;
     }
 
     dispose() {
+        process.env.PATH -= `:${this.path}`;
         this.eventEmitter = null;
     }
 
@@ -26,15 +28,23 @@ export class TaskRunner {
 
             const task = tasks[i];
             if (task.command) {
-                self.runCommand(task).then(_ => {
-                    processNextTask();
-                })
+                self.runCommand(task)
+                    .then(_ => {
+                        processNextTask();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
             }
             else
             {
-                self.runTask(task).then(_ => {
-                    processNextTask();
-                })
+                self.runTask(task)
+                    .then(_ => {
+                        processNextTask();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
             }
         }
 
@@ -42,12 +52,25 @@ export class TaskRunner {
     }
 
     runCommand(task) {
-        return new Promise((resolve, reject) => {
-            this.eventEmitter.emit("description", task.description);
+        this.eventEmitter.emit("description", task.description);
 
-            const ls = exec(task.command, {
-                cwd: this.path
-            }, (error, stdout, stderr) => {
+        if (task.command.indexOf("gulp ") > -1) {
+            return this.spawnCommand(task);
+        }
+        else {
+            return this.execCommand(task);
+        }
+    }
+
+    execCommand(task) {
+        return new Promise((resolve, reject) => {
+            const options = {
+                cwd: this.path,
+            };
+
+            const command = task.command;
+
+            const ls = childProcess.exec(command, options, (error, stdout, stderr) => {
                 if (error) {
                     reject(error);
                 }
@@ -62,6 +85,28 @@ export class TaskRunner {
         });
     }
 
+    spawnCommand(task) {
+        return new Promise((resolve, reject) => {
+            const command = `cd "${this.path}/node_modules/.bin/" && ${task.command}`;
+
+            const gulp = childProcess.spawn(process.env.SHELL, ['-c', command]);
+
+            gulp.stdout.on('data', (data) => {
+              console.log(`stdout: ${data}`);
+            });
+
+            gulp.stderr.on('data', (data) => {
+              console.log(`stderr: ${data}`);
+              reject(data);
+            });
+
+            gulp.on('close', (code) => {
+              console.log(`child process exited with code ${code}`);
+              resolve();
+            });
+        });
+    }
+
     runTask(task) {
         if (task.task == "template") {
             const source = `${global.applicationPath}/templates/${task.source}`;
@@ -71,8 +116,6 @@ export class TaskRunner {
     }
 
     saveTemplateTo(fromFile, toFile, description) {
-        console.log(fromFile);
-
         return new Promise((resolve, reject) => {
             this.eventEmitter.emit("description", description);
             fs.createReadStream(fromFile)

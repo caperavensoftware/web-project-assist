@@ -15,7 +15,7 @@ export class WebProject {
         }
         else
         {
-            return this.getFolderName();
+            return this.getFolderName(this.currentProjectPath);
         }
     }
 
@@ -29,27 +29,31 @@ export class WebProject {
         const dialog = require('electron').remote.dialog;
         const folder = dialog.showOpenDialog({ properties: ['openDirectory']});
 
-        if (folder.indexOf(" ") > -1) {
+        if (this.getFolderName(folder[0]).indexOf(" ") > -1) {
             this.errors = ["folder may not have spaces in the name"];
             return false;
         }
 
         this.currentProjectPath = folder[0];
 
-        if (this.packageJson.load(this.currentProjectPath)) {
-            this.router.navigate("project");
-        }
-        else {
-            this.router.navigate("new-project");
-        }
+        process.chdir(this.currentProjectPath);
+
+        // if (this.packageJson.load(this.currentProjectPath)) {
+        //     this.router.navigate("project");
+        // }
+        // else {
+        //     this.router.navigate("new-project");
+        // }
+
+        this.router.navigate("new-project");
     }
 
-    getFolderName() {
-        if (!this.currentProjectPath) {
+    getFolderName(path) {
+        if (!this.path) {
             return "";
         }
 
-        const paths = this.currentProjectPath.split('/');
+        const paths = this.path.split('/');
         const folder = paths[paths.length -1];
 
         if (folder.indexOf(" ") > -1) {

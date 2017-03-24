@@ -11,7 +11,8 @@
     "watch:ui": "gulp build:all && gulp watch:ui",
     "watch:all": "gulp build:all && gulp watch:all",
     "run": "gulp build:all && electron .",
-    "package": "electron-packager ./ WebProjectAssist --all --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite --x64"
+    "package": "electron-packager ./ WebProjectAssist --all --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite",
+    "package-mac": "electron-packager ./ WebProjectAssist -platform darwin --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite"
   },
   "keywords": [],
   "author": "Johan Rabie",
@@ -38,6 +39,7 @@
     "devDependencies": {}
   },
   "dependencies": {
+    "fix-path": "^2.1.0",
     "mkdirp": "^0.5.1"
   }
 }

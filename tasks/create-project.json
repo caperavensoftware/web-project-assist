@@ -10,13 +10,17 @@
       "description": "install build-utilities, this make take some time"
     },
     {
+      "command": "npm install jspm --save-dev",
+      "description": "install build-utilities, this make take some time"
+    },
+    {
       "task": "template",
       "source": "project/gulpfile.js.template",
       "target": "gulpfile.js",
       "description": "set up gulpfile"
     },
     {
-      "command": "gulp init-project",
+      "command": "node gulp init-project",
       "description": "initialize project"
     },
     {
@@ -28,7 +32,7 @@
       "description": "add git files"
     },
     {
-      "command": "gulp build:all",
+      "command": "node gulp build:all",
       "description": "building project"
     }
   ]

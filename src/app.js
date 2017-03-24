@@ -2,6 +2,8 @@ import {inject} from 'aurelia-framework';
 import {WebProject} from "./lib/web-project";
 import {menuItems, quickItems} from './menu-items';
 
+const fixPath = require('fix-path');
+
 @inject(WebProject)
 export class App {
     router = null;
@@ -11,7 +13,13 @@ export class App {
         this.webProject = webProject;
         this.menuItems = menuItems;
         this.quickItems = quickItems;
-        global.applicationPath = process.cwd();
+        global.applicationPath = __dirname;
+
+        fixPath();
+        // if(process.platform === "darwin") {
+        //     process.env.PATH += ":/usr/local/bin";
+        // }
+        //
         console.log(`electron: ${process.versions.electron}`);
     }
 
