@@ -3,6 +3,14 @@ import screenTemplate from './../../../../templates/schema/screen-template.json.
 
 require("codemirror/mode/javascript/javascript");
 require("codemirror/addon/edit/closebrackets");
+
+require("codemirror/addon/fold/foldcode");
+require("codemirror/addon/fold/foldgutter");
+require("codemirror/addon/fold/brace-fold");
+require("codemirror/addon/fold/indent-fold");
+require("codemirror/addon/fold/indent-fold");
+require("codemirror/addon/fold/comment-fold");
+
 const codeMirror = require("codemirror");
 
 @customElement('pragma-editor')
@@ -22,6 +30,11 @@ export class PragmaEditor {
             mode: this.language,
             lineNumbers: true,
             autoCloseBrackets: true,
+            matchTags: {bothTags: true},
+
+            foldGutter: true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+
             extraKeys: {
                 "Ctrl-Space": "autocomplete",
                 "Ctrl-S": cm => {
