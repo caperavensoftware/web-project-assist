@@ -25,7 +25,7 @@ export class PragmaEditor {
             extraKeys: {
                 "Ctrl-Space": "autocomplete",
                 "Ctrl-S": cm => {
-                    this.save();
+                    this.value = this.editor.getDoc().getValue();
                 }
             }
         };
@@ -38,11 +38,10 @@ export class PragmaEditor {
         }
 
         this.editor = codeMirror.fromTextArea(this.codearea, options);
-        this.editor.getDoc().setValue(screenTemplate);
-        this.save();
+        this.value = screenTemplate;
     }
 
-    save() {
-        this.value = this.editor.getDoc().getValue();
+    valueChanged() {
+        this.editor.getDoc().setValue(this.value);
     }
 }

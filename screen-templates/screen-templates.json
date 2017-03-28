@@ -25,17 +25,6 @@
             "styles": ["stretch", "vertical", "container"],
             "elements": [
               {
-                "element": "div",
-                "styles": ["toolbar"],
-                "elements": [
-                  {
-                    "element": "button",
-                    "title": "Preview",
-                    "action": "preview"
-                  }
-                ]
-              },
-              {
                 "element": "pragma-editor",
                 "styles": ["stretch"],
                 "attributes": {
