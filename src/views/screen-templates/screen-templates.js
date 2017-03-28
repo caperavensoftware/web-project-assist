@@ -5,9 +5,11 @@ import template from './../../../../screen-templates/screen-templates.json!text'
 
 class ScreenTemplatesModel {
     code;
+    description;
 
     constructor() {
         this.code = "A11";
+        this.description = "Not area 51"
     }
 }
 

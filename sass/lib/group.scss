@@ -7,6 +7,11 @@
   border-radius: $group-border-radius;
   position: relative;
   margin-bottom: 1rem;
+  transition: all 0.4s;
+}
+
+.group.closed {
+  padding-bottom: 0;
 }
 
 .group:before {
@@ -18,4 +23,13 @@
   width: 0.4rem;
   height: 1.5rem;
   background: $group-highlight;
+}
+
+.group header {
+  @include flex();
+  @include flex-row();
+}
+
+.group header h3 {
+  @include stretch();
 }

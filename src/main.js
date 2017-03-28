@@ -4,6 +4,7 @@ export function configure(aurelia) {
             .standardConfiguration()
             .developmentLogging()
             .globalResources(
+                'pragma-tabsheet/pragma-tabsheet',
                 'pragma-menu/pragma-menu',
                 'pragma-views/components/icons/icon.html',
                 'pragma-views/components/menu/menu',
