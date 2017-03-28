@@ -1,4 +1,4 @@
-import {customElement, binding, inject} from 'aurelia-framework';
+import {customElement, bindable, inject} from 'aurelia-framework';
 import screenTemplate from './../../../../templates/schema/screen-template.json.template!text';
 
 require("codemirror/mode/javascript/javascript");
@@ -9,19 +9,25 @@ const codeMirror = require("codemirror");
 @inject(Element)
 export class PragmaEditor {
     element = null;
-    language;
+
+    @bindable language;
+    @bindable value;
 
     constructor(element) {
         this.element = element;
     }
 
     attached() {
-        this.setProperty("language", "language", "json");
-
         const options = {
             mode: this.language,
             lineNumbers: true,
-            autoCloseBrackets: true
+            autoCloseBrackets: true,
+            extraKeys: {
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-S": cm => {
+                    this.save();
+                }
+            }
         };
 
         if (this.language == "json") {
@@ -33,16 +39,10 @@ export class PragmaEditor {
 
         this.editor = codeMirror.fromTextArea(this.codearea, options);
         this.editor.getDoc().setValue(screenTemplate);
+        this.save();
     }
 
-    setProperty(attr, prop, defaultValue) {
-        const attribute = this.element.getAttribute(attr);
-
-        if (attribute) {
-            this[prop] = attribute;
-        }
-        else {
-            this[prop] = defaultValue;
-        }
+    save() {
+        this.value = this.editor.getDoc().getValue();
     }
 }

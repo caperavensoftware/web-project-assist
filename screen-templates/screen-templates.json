@@ -38,10 +38,10 @@
               },
               {
                 "element": "pragma-editor",
-                "field": "templateText",
                 "styles": ["stretch"],
                 "attributes": {
-                  "language": "json"
+                  "language": "json",
+                  "value.two-way": "templateText"
                 }
               }
             ]
