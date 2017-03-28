@@ -52,6 +52,10 @@ export class ScreenTemplates {
     }
 
     preview() {
+        if (this.editor) {
+            this.editor.au["pragma-editor"].viewModel.update();
+        }
+
         this.templateParser.parse(JSON.parse(this.templateText)).then(result => {
             this.dynamicViewLoader.load(result, this.previewElement, this);
         });

@@ -29,7 +29,8 @@
                 "styles": ["stretch"],
                 "attributes": {
                   "language": "json",
-                  "value.two-way": "templateText"
+                  "value.two-way": "templateText",
+                  "ref": "editor"
                 }
               }
             ]
