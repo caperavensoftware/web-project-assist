@@ -1,0 +1,35 @@
+{
+  "type": "views",
+  "fields": [
+    {
+        "field": "code",
+        "map": "onkey_code"
+    }
+  ],
+  "body": {
+    "tabsheet": [
+        {
+            "id": "tabDetails",
+            "title": "Details",
+            "groups": [
+                {
+                    "id": "groupHeader",
+                    "title": "Header",
+                    "elements": [
+                       {
+                            "title": "Code",
+                            "field": "code",
+                            "element": "input",
+                            "description": "",
+                            "attributes": {
+                                "type": "text",
+                                "data-lookup": "lookup"
+                            }
+                       }
+                    ]
+                }
+            ]
+        }
+    ]
+  }
+}

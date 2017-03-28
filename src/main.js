@@ -8,7 +8,8 @@ export function configure(aurelia) {
                 'pragma-views/components/icons/icon.html',
                 'pragma-views/components/menu/menu',
                 'pragma-views/components/assistant/assistant',
-                'pragma-views/components/input-composite/input-composite'
+                'pragma-views/components/input-composite/input-composite',
+                'components/pragma-editor/pragma-editor'
             );
 
         aurelia.start().then(() => {

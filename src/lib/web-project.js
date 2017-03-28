@@ -38,14 +38,12 @@ export class WebProject {
 
         process.chdir(this.currentProjectPath);
 
-        // if (this.packageJson.load(this.currentProjectPath)) {
-        //     this.router.navigate("project");
-        // }
-        // else {
-        //     this.router.navigate("new-project");
-        // }
-
-        this.router.navigate("new-project");
+        if (this.packageJson.load(this.currentProjectPath)) {
+            this.router.navigate("project");
+        }
+        else {
+            this.router.navigate("new-project");
+        }
     }
 
     getFolderName(path) {

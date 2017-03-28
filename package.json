@@ -39,6 +39,7 @@
     "devDependencies": {}
   },
   "dependencies": {
+    "codemirror": "^5.25.0",
     "fix-path": "^2.1.0",
     "mkdirp": "^0.5.1"
   }

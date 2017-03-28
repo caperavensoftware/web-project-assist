@@ -16,14 +16,14 @@
               "id": "previewElement",
               "ref": "previewElement"
             },
-            "styles": ["stretch"]
+            "styles": ["width600"]
           },
           {
             "element": "div",
             "attributes": {
               "id": "preview"
             },
-            "styles": ["stretch, container, vertical"],
+            "styles": ["stretch", "vertical", "container"],
             "elements": [
               {
                 "element": "div",
@@ -37,9 +37,12 @@
                 ]
               },
               {
-                "element": "textarea",
+                "element": "pragma-editor",
                 "field": "templateText",
-                "styles": ["stretch"]
+                "styles": ["stretch"],
+                "attributes": {
+                  "language": "json"
+                }
               }
             ]
           }
