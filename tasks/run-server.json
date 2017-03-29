@@ -2,7 +2,7 @@
   "name": "Run Server",
   "tasks": [
     {
-      "command": "gulp serve",
+      "command": "node gulp serve",
       "description": "1. run server"
     }
   ]

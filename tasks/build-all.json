@@ -2,7 +2,7 @@
   "name": "Build All",
   "tasks": [
     {
-      "command": "gulp build:all",
+      "command": "node gulp build:all",
       "description": "1. build:all"
     }
   ]
