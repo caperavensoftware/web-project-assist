@@ -2,6 +2,7 @@ import {inject} from 'aurelia-framework';
 import {WebProject} from './../lib/web-project';
 import {Router} from 'aurelia-router';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {DialogService} from 'aurelia-dialog';
 
 @inject(Element, WebProject, Router, EventAggregator)
 export class ViewBase {

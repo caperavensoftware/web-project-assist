@@ -1,0 +1,15 @@
+#createClass, #createComponent, #createView {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  transition: margin-top 0.3s linear;
+  will-change: margin-top;
+  height: 11rem;
+}
+
+#createClass.closed, #createComponent.closed, #createView.closed {
+  margin-top: -15rem;
+}

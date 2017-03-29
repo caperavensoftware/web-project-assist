@@ -1,17 +1,61 @@
 <template>
+    <require from="./project.css"></require>
+
     <div>Project</div>
 
     <input-composite id="itemName" label="Name" isRequired="true">
-        <input type="text" value.bind="model.name" autofocus/>
+        <div>${model.name}</div>
     </input-composite>
 
     <input-composite id="itemPath" label="Path" isRequired="true">
-        <input type="text" value.bind="model.path" />
+        <div>${model.path}</div>
     </input-composite>
 
-    <div class="align-items-right default-padding-right">
-        <button click.delegate="createClass()">Class</button>
-        <button click.delegate="createComponent()">Component</button>
-        <button click.delegate="createView()">View</button>
+    <div id="createClass" ref="createClassElement" class="closed">
+        <div class="group">
+            <h3>Create Class</h3>
+            <input-composite id="itemName" label="Name" isRequired="true">
+                <input type="text" value.bind="newItem.name" ref="edtCreateClass"/>
+            </input-composite>
+
+            <input-composite id="itemName" label="Path" isRequired="true">
+                <input type="text" value.bind="newItem.path" />
+            </input-composite>
+
+            <div class="toolbar">
+                <button click.delegate="hideClass()">Cancel</button>
+                <button click.delegate="performCreateClass()" class="primary-action">Create</button>
+            </div>
+        </div>
     </div>
+
+    <div id="createComponent" ref="createComponentElement" class="closed">
+        <div class="group">
+            <h3>Create Component</h3>
+            <input-composite id="itemName" label="Name" isRequired="true">
+                <input type="text" value.bind="newItem.name" ref="edtCreateComponent"/>
+            </input-composite>
+
+            <div class="toolbar">
+                <button click.delegate="hideComponent()">Cancel</button>
+                <button click.delegate="performCreateComponent()" class="primary-action">Create</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="createView" ref="createViewElement" class="closed">
+        <div class="group">
+            <h3>Create View</h3>
+            <input-composite id="itemName" label="Name" isRequired="true">
+                <input type="text" value.bind="newItem.name" ref="edtCreateView"/>
+            </input-composite>
+
+            <div class="toolbar">
+                <button click.delegate="hideView()">Cancel</button>
+                <button click.delegate="performCreateView()" class="primary-action">Create</button>
+            </div>
+        </div>
+    </div>
+
 </template>

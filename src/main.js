@@ -3,6 +3,7 @@ export function configure(aurelia) {
         aurelia.use
             .standardConfiguration()
             .developmentLogging()
+            .plugin('aurelia-dialog')
             .globalResources(
                 'pragma-tabsheet/pragma-tabsheet',
                 'pragma-menu/pragma-menu',

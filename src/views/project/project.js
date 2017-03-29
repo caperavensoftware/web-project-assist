@@ -1,19 +1,24 @@
 import {ViewBase} from './../view-base';
 import {generateClass, generateComponent, generateView} from './../../lib/code-gen';
+import assistHtml from './project-assist.html!text';
+import {NewComponent} from './new-component';
 
 export class Project extends ViewBase {
+    newItem = {
+        name: "",
+        path: "lib"
+    };
+
     constructor(element, webProject, router, eventAggregator) {
         super(element, webProject, router, eventAggregator);
 
-        this.model = new ProjectModel();
+        this.model = new ProjectModel(this.webProject);
         this.webProject.isMenuVisible = true;
     }
 
     attached() {
-        const html = '<button click.delegate="sayHello()">Click Me</button>';
-
         this.eventAggregator.publish("assistant", {
-            view: html,
+            view: assistHtml,
             viewModel: this
         })
     }
@@ -23,19 +28,73 @@ export class Project extends ViewBase {
     }
 
     createClass() {
-        generateClass(this.model.name, this.model.path, this.webProject.currentProjectPath);
+        this.createComponentElement.classList.add("closed");
+        this.createClassElement.classList.remove("closed");
+        this.createViewElement.classList.add("closed");
+
+        this.edtCreateClass.focus();
+    }
+
+    hideClass() {
+        this.createClassElement.classList.add("closed");
+    }
+
+    performCreateClass() {
+        if (this.newItem.name.length == 0) {
+            return;
+        }
+
+        generateClass(this.newItem.name, this.newItem.path, this.webProject.currentProjectPath);
+        this.newItem.name = "";
+        this.hideClass();
+        alert("class created");
     }
 
     createComponent() {
-        generateComponent(this.model.name, this.webProject.currentProjectPath)
+        this.createComponentElement.classList.remove("closed");
+        this.createClassElement.classList.add("closed");
+        this.createViewElement.classList.add("closed");
+
+        this.edtCreateComponent.focus();
+    }
+
+    performCreateComponent() {
+        generateComponent(this.newItem.name, this.webProject.currentProjectPath)
+        this.newItem.name = "";
+        this.hideComponent();
+        alert("component created");
+    }
+
+    hideComponent() {
+        this.createComponentElement.classList.add("closed");
     }
 
     createView() {
-        generateView(this.model.name, this.webProject.currentProjectPath)
+        this.createComponentElement.classList.add("closed");
+        this.createClassElement.classList.add("closed");
+        this.createViewElement.classList.remove("closed");
+
+        this.edtCreateView.focus();
+    }
+
+    hideView() {
+        this.createViewElement.classList.add("closed");
+    }
+
+    performCreateView() {
+        generateView(this.newItem.name, this.webProject.currentProjectPath);
+        this.newItem.name = "";
+        this.hideView();
+        alert("view created");
     }
 }
 
 class ProjectModel {
-    name = "newItem";
-    path = "lib";
+    name;
+    path;
+
+    constructor(webProject) {
+        this.name = webProject.name;
+        this.path = webProject.currentProjectPath;
+    }
 }

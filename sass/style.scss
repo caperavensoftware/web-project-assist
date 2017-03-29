@@ -52,3 +52,16 @@
 .fullsize {
   white-space: nowrap;
 }
+
+router-view {
+  position: relative;
+}
+
+.toolbar {
+  @include flex();
+  justify-content: flex-end;
+}
+
+.primary-action {
+  background: #50E3AC;
+}
