@@ -2,6 +2,11 @@ import {ViewBase} from './../view-base';
 import {generateClass, generateComponent, generateView} from './../../lib/code-gen';
 import assistHtml from './project-assist.html!text';
 import {NewComponent} from './new-component';
+import {TaskRunner} from './../../lib/task-runner';
+import buildAll from './../../../../tasks/build-all.json!text';
+import runServer from './../../../../tasks/run-server.json!text';
+
+const EventEmitter = require('events');
 
 export class Project extends ViewBase {
     newItem = {
@@ -9,11 +14,23 @@ export class Project extends ViewBase {
         path: "lib"
     };
 
+    progressText;
+
     constructor(element, webProject, router, eventAggregator) {
         super(element, webProject, router, eventAggregator);
 
         this.model = new ProjectModel(this.webProject);
         this.webProject.isMenuVisible = true;
+        this.webProject.reloadPackage();
+
+        this.doneHandler = this.done.bind(this);
+        this.progressHandler = this.progress.bind(this);
+
+        this.eventEmitter = new EventEmitter();
+        this.eventEmitter.on("done", this.doneHandler);
+        this.eventEmitter.on("progress", this.progressHandler);
+
+        this.taskRunner = new TaskRunner(this.webProject.currentProjectPath, this.eventEmitter);
     }
 
     attached() {
@@ -21,6 +38,14 @@ export class Project extends ViewBase {
             view: assistHtml,
             viewModel: this
         })
+    }
+
+    detached() {
+        this.doneHandler = null;
+        this.taskRunner = null;
+        this.model = null;
+        this.webProject = null;
+        this.progressHandler = null;
     }
 
     sayHello() {
@@ -86,6 +111,26 @@ export class Project extends ViewBase {
         this.newItem.name = "";
         this.hideView();
         alert("view created");
+    }
+
+    buildAll() {
+        this.progressElement.classList.remove("closed");
+        this.taskRunner.runTasks(buildAll, "build-all");
+    }
+
+    runServer() {
+        this.taskRunner.runTasks(runServer, "run-server");
+    }
+
+    done(args) {
+        if (args === "build-all") {
+            this.progressElement.classList.add("closed");
+            alert("build completed");
+        }
+    }
+
+    progress(args) {
+        this.progressText = args;
     }
 }
 

@@ -1,0 +1,9 @@
+{
+  "name": "Run Server",
+  "tasks": [
+    {
+      "command": "gulp serve",
+      "description": "1. run server"
+    }
+  ]
+}

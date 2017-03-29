@@ -48,6 +48,10 @@ export class WebProject {
         }
     }
 
+    reloadPackage() {
+        this.packageJson.load(this.currentProjectPath)
+    }
+
     getFolderName(path) {
         if (!this.path) {
             return "";

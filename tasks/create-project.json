@@ -3,37 +3,37 @@
   "tasks": [
     {
       "command": "npm init -y",
-      "description": "initialize npm"
+      "description": "1. initialize npm"
     },
     {
       "command": "npm install build-utilities --save-dev",
-      "description": "install build-utilities, this make take some time"
+      "description": "2. install build-utilities, this make take some time"
     },
     {
       "command": "npm install jspm --save-dev",
-      "description": "install build-utilities, this make take some time"
+      "description": "3. install build-utilities, this make take some time"
     },
     {
       "task": "template",
       "source": "project/gulpfile.js.template",
       "target": "gulpfile.js",
-      "description": "set up gulpfile"
+      "description": "4. set up gulpfile"
     },
     {
       "command": "node gulp init-project",
-      "description": "initialize project"
+      "description": "5. initialize project"
     },
     {
       "command": "git init",
-      "description": "initialize git"
+      "description": "6. initialize git"
     },
     {
       "command": "git add -A && git commit -m 'Initial'",
-      "description": "add git files"
+      "description": "7. add git files"
     },
     {
       "command": "node gulp build:all",
-      "description": "building project"
+      "description": "8. building project"
     }
   ]
 }

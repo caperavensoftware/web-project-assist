@@ -1,4 +1,4 @@
-#createClass, #createComponent, #createView {
+#createClass, #createComponent, #createView, #progress {
   position: absolute;
   left: 0;
   right: 0;
@@ -10,6 +10,6 @@
   height: 11rem;
 }
 
-#createClass.closed, #createComponent.closed, #createView.closed {
+#createClass.closed, #createComponent.closed, #createView.closed, #progress.closed {
   margin-top: -15rem;
 }

@@ -55,6 +55,7 @@
 
 router-view {
   position: relative;
+  padding: $default-padding;
 }
 
 .toolbar {
