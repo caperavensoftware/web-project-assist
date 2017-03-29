@@ -1,15 +1,17 @@
 <template>
     <require from="./project.css"></require>
 
-    <div>Project</div>
+    <div class="group">
+        <h3>Project Information</h3>
 
-    <input-composite id="itemName" label="Name" isRequired="true">
-        <div>${model.name}</div>
-    </input-composite>
+        <input-composite id="itemName" label="Name" isRequired="true">
+            <div>${model.name}</div>
+        </input-composite>
 
-    <input-composite id="itemPath" label="Path" isRequired="true">
-        <div>${model.path}</div>
-    </input-composite>
+        <input-composite id="itemPath" label="Path" isRequired="true">
+            <div>${model.path}</div>
+        </input-composite>
+    </div>
 
     <div id="createClass" ref="createClassElement" class="closed">
         <div class="group">

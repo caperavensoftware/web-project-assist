@@ -6,13 +6,9 @@
             <div>${webProject.currentProjectPath}</div>
         </input-composite>
 
-        <input-composite id="projectName" label="Project Name" isRequired="true">
-            <input type="text" value.bind="webProject.packageJson.packageObject.name" autofocus/>
-        </input-composite>
-
-        <div class="align-items-right default-padding-right">
+        <div class="toolbar">
             <button click.delegate="cancel()">Cancel</button>
-            <button click.delegate="createProject()">Create Project</button>
+            <button click.delegate="createProject()" class="primary-action">Create Project</button>
         </div>
     </div>
 

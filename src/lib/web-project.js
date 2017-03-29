@@ -29,7 +29,9 @@ export class WebProject {
         const dialog = require('electron').remote.dialog;
         const folder = dialog.showOpenDialog({ properties: ['openDirectory']});
 
-        if (this.getFolderName(folder[0]).indexOf(" ") > -1) {
+        const folderName = this.getFolderName(folder[0]);
+
+        if (folderName.indexOf(" ") > -1) {
             this.errors = ["folder may not have spaces in the name"];
             return false;
         }

@@ -20,7 +20,7 @@ class ScreenTemplatesModel {
 }
 
 @inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject)
-export class ScreenTemplates {
+export class ScreenTemplates{
     genContainer;
     templateParser;
     model;
