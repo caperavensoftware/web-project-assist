@@ -39,5 +39,16 @@
 }
 
 .width600 {
-  min-width: 600px;
+  max-width: 600px;
+
+}
+
+.inline {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.fullsize {
+  white-space: nowrap;
 }

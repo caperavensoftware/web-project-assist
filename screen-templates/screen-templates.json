@@ -7,7 +7,7 @@
     "elements": [
       {
         "element": "div",
-        "styles": ["fullsize", "container", "horizontal"],
+        "styles": ["fullsize"],
         "elements": [
           {
             "element": "div",
@@ -15,14 +15,14 @@
               "id": "previewElement",
               "ref": "previewElement"
             },
-            "styles": ["width600"]
+            "styles": ["width600", "inline"]
           },
           {
             "element": "div",
             "attributes": {
               "id": "preview"
             },
-            "styles": ["stretch", "vertical", "container"],
+            "styles": ["inline"],
             "elements": [
               {
                 "element": "pragma-editor",
