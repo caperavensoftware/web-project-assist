@@ -15,6 +15,7 @@ export class Project extends ViewBase {
     };
 
     progressText;
+    serverActionCaption;
 
     constructor(element, webProject, router, eventAggregator) {
         super(element, webProject, router, eventAggregator);
@@ -25,12 +26,15 @@ export class Project extends ViewBase {
 
         this.doneHandler = this.done.bind(this);
         this.progressHandler = this.progress.bind(this);
+        this.processRunningHandler = this.processRunning.bind(this);
 
         this.eventEmitter = new EventEmitter();
         this.eventEmitter.on("done", this.doneHandler);
         this.eventEmitter.on("progress", this.progressHandler);
+        this.eventEmitter.on("process-running", this.processRunningHandler);
 
         this.taskRunner = new TaskRunner(this.webProject.currentProjectPath, this.eventEmitter);
+        this.serverActionCaption = "Run Server";
     }
 
     attached() {
@@ -41,11 +45,13 @@ export class Project extends ViewBase {
     }
 
     detached() {
+        this.killServer();
         this.doneHandler = null;
         this.taskRunner = null;
         this.model = null;
         this.webProject = null;
         this.progressHandler = null;
+        this.processRunningHandler = null;
     }
 
     sayHello() {
@@ -118,8 +124,22 @@ export class Project extends ViewBase {
         this.taskRunner.runTasks(buildAll, "build-all");
     }
 
+    killServer() {
+        if (this.serverProcess) {
+            this.serverProcess.kill('SIGINT');
+            this.serverProcess = null;
+            this.serverActionCaption = "Run Server";
+        }
+    }
+
     runServer() {
-        this.taskRunner.runTasks(runServer, "run-server");
+        if (this.serverProcess) {
+            this.killServer();
+        }
+        else {
+            this.taskRunner.runTasks(runServer, "run-server");
+            this.serverActionCaption = "Stop Server";
+        }
     }
 
     done(args) {
@@ -131,6 +151,12 @@ export class Project extends ViewBase {
 
     progress(args) {
         this.progressText = args;
+    }
+
+    processRunning(args) {
+        if (args.id == "run-server") {
+            this.serverProcess = args.process;
+        }
     }
 }
 

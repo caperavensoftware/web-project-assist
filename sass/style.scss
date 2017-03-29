@@ -67,3 +67,18 @@ router-view {
   background: #50E3AC;
   margin-left: $default-padding;
 }
+
+.active-service {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #50E3AC;
+  margin-left: $default-padding;
+}
+
+.center-aligned-row {
+  @include flex();
+  @include flex-row();
+  align-items: center;
+}

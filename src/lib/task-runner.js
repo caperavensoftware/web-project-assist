@@ -13,7 +13,8 @@ export class TaskRunner {
         this.eventEmitter = null;
     }
 
-    runTasks(tasksJson, id) {
+    runTasks(tasksJson, taskProcessId) {
+        this.taskProcessId = taskProcessId;
         const tasks = JSON.parse(tasksJson).tasks;
 
         let i = -1;
@@ -23,7 +24,7 @@ export class TaskRunner {
             i++;
 
             if (i > tasks.length - 1) {
-                return self.eventEmitter.emit("done", id);
+                return self.eventEmitter.emit("done", taskProcessId);
             }
 
             const task = tasks[i];
@@ -91,6 +92,11 @@ export class TaskRunner {
             const command = `cd "${this.path}/node_modules/.bin/" && ${task.command}`;
 
             const gulp = childProcess.spawn(process.env.SHELL, ['-c', command]);
+
+            this.eventEmitter.emit("process-running", {
+                id: this.taskProcessId,
+                process: gulp
+            });
 
             gulp.stdout.on('data', (data) => {
                 console.log(`stdout: ${data}`);
