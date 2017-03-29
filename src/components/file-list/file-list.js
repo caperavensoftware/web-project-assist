@@ -21,12 +21,14 @@ export class FileList {
         const path = `${projetPath}/${this.folder}`;
 
         fs.readdir(path, (err, files) => {
-            this.files = files.map((value, index) => {
-                return {
-                    name: value,
-                    id: index
-                }
-            });
+            if (files) {
+                this.files = files.map((value, index) => {
+                    return {
+                        name: value,
+                        id: index
+                    }
+                });
+            }
         });
     }
 
