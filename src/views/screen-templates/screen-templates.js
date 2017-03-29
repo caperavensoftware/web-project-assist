@@ -74,10 +74,12 @@ export class ScreenTemplates {
 
     newViewTemplate() {
         this.templateText = schemaTemplate;
+        this.selectedFile = null;
     }
 
     newListTemplate() {
         alert("not yet defined");
+        this.selectedFile = null;
     }
 
     commit() {
@@ -85,7 +87,7 @@ export class ScreenTemplates {
     }
 
     selectedFileChanged() {
-        if (this.selectedFile.length > 0) {
+        if (this.selectedFile) {
             const projetPath = this.webProject.currentProjectPath ? this.webProject.currentProjectPath : global.applicationPath;
             const temlatePath = `${projetPath}/screen-templates/${this.selectedFile}`;
 

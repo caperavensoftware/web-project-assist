@@ -38,5 +38,18 @@ export class FileList {
 
             this.selectedFile = file.name;
         }
+        else {
+            const selectedItem = this.element.querySelector("[aria-selected]");
+
+            if (selectedItem) {
+                selectedItem.removeAttribute("aria-selected");
+            }
+        }
+    }
+
+    selectedFileChanged() {
+        if (this.selectedFile == null) {
+            this.selectedId = null;
+        }
     }
 }
