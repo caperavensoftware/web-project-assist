@@ -1,0 +1,98 @@
+{
+  "type": "view",
+  "fields": [
+    {
+      "field": "id",
+      "map": "id"
+    },
+    {
+      "field": "code",
+      "map": "code"
+    },
+    {
+      "field": "firstName",
+      "map": "firstName"
+    },
+    {
+      "field": "lastName",
+      "map": "lastName"
+    },
+    {
+      "field": "siteCode",
+      "map": "siteCode"
+    },
+    {
+      "field": "isActive",
+      "map": "siteCode"
+    }
+  ],
+  "body": {
+    "tabsheet": [
+      {
+        "id": "tabHeader",
+        "title": "Header",
+        "groups": [
+          {
+            "id": "detailsGroup",
+            "title": "Details",
+            "elements": [
+              {
+                "title": "Code",
+                "field": "code",
+                "element": "input",
+                "attributes": {
+                  "type": "text"
+                }
+              },
+              {
+                "title": "First Name",
+                "field": "firstName",
+                "element": "input",
+                "attributes": {
+                  "type": "text"
+                }
+              },
+              {
+                "title": "Last Name",
+                "field": "lastName",
+                "element": "input",
+                "attributes": {
+                  "type": "text"
+                }
+              },
+              {
+                "title": "Is Active",
+                "field": "isActive",
+                "element": "input",
+                "attributes": {
+                  "type": "text",
+                  "aria-readonly": "true"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tabCompetencies",
+        "title": "Competencies",
+        "elements": [
+          {
+            "element": "div",
+            "content": "Competencies grid will show here"
+          },
+          {
+            "element": "form-search",
+            "attributes": {
+              "search.two-way": "mysearch"
+            }
+          },
+          {
+            "element": "div",
+            "content": "${mysearch}"
+          }
+        ]
+      }
+    ]
+  }
+}

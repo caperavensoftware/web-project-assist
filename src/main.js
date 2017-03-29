@@ -6,11 +6,13 @@ export function configure(aurelia) {
             .globalResources(
                 'pragma-tabsheet/pragma-tabsheet',
                 'pragma-menu/pragma-menu',
+                'pragma-views/custom-attributes/selectable',
                 'pragma-views/components/icons/icon.html',
                 'pragma-views/components/menu/menu',
                 'pragma-views/components/assistant/assistant',
                 'pragma-views/components/input-composite/input-composite',
-                'components/pragma-editor/pragma-editor'
+                'components/pragma-editor/pragma-editor',
+                'components/file-list/file-list'
             );
 
         aurelia.start().then(() => {

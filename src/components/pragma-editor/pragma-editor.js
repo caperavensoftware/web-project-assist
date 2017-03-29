@@ -1,5 +1,4 @@
 import {customElement, bindable, inject} from 'aurelia-framework';
-import screenTemplate from './../../../../templates/schema/screen-template.json.template!text';
 
 require("codemirror/mode/javascript/javascript");
 require("codemirror/addon/edit/closebrackets");
@@ -51,7 +50,6 @@ export class PragmaEditor {
         }
 
         this.editor = codeMirror.fromTextArea(this.codearea, options);
-        this.value = screenTemplate;
     }
 
     update() {

@@ -1,5 +1,9 @@
 <div class="assist-container">
+    <h3>Actions</h3>
     <button click.delegate="preview()">Update Preview</button>
-    <button click.delegate="newTemplate()">New Template</button>
+    <button click.delegate="newViewTemplate()">New View Template</button>
+    <button click.delegate="newListTemplate()">New List Template</button>
     <button click.delegate="commit()">Commit Changes</button>
+
+    <file-list folder="screen-templates" selected-file.two-way="selectedFile"></file-list>
 </div>
