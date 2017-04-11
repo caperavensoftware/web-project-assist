@@ -34,6 +34,7 @@ export class Icons {
 
             this.svgContainer.setAttribute("viewBox", svgData.viewBox.split('"')[1]);
             this.svgContainer.innerHTML = svgData.innerSvg;
+            this.svgText = this.svgContainer.outerHTML;
         });
     }
 
@@ -67,10 +68,6 @@ export class Icons {
 
             const removeFill = result.substring(startIndex, secondQuote + 1);
             result = result.replace(removeFill, '');
-        }
-
-        if (result.indexOf('<path d="M872 27h18v18h-18z"/>') !== -1) {
-            result = result.replace('<path d="M872 27h18v18h-18z"/>', '');
         }
 
         return result;
