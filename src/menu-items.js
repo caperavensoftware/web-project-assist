@@ -10,6 +10,10 @@ export const menuItems = [
     {
         text: "Screen Template",
         screen: "screen-templates"
+    },
+    {
+        text: "Icons",
+        screen: "icons"
     }
 ];
 
