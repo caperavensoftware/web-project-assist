@@ -26,7 +26,54 @@ export class Icons {
 
         svgo.optimize(this.svgText, result => {
             this.svgText = result.data;
+
+            const svgData = {
+                viewBox: this.getViewBox(),
+                innerSvg: this.getInnerSVG()
+            };
+
+            this.svgContainer.setAttribute("viewBox", svgData.viewBox.split('"')[1]);
+            this.svgContainer.innerHTML = svgData.innerSvg;
         });
+    }
+
+    getViewBox() {
+        const startIndex = this.svgText.indexOf('viewBox');
+        const firstQuote = this.svgText.indexOf('"', startIndex);
+        const secondQuote = this.svgText.indexOf('"', firstQuote + 1);
+
+        return this.svgText.substring(startIndex, secondQuote);
+    }
+
+    getInnerSVG() {
+        const startIndex = this.svgText.indexOf('>') + 1;
+        const nextIndex = this.svgText.indexOf('</svg>');
+
+        return this.cleanInnerSVG(this.svgText.substring(startIndex, nextIndex));
+    }
+
+    cleanInnerSVG(svg) {
+        let result = svg;
+
+        if (result.indexOf('<g opacity=".8" fill="none" fill-rule="evenodd">') !== -1) {
+            result = result.replace('<g opacity=".8" fill="none" fill-rule="evenodd">', '');
+            result = result.replace('</g>', '');
+        }
+
+        if (result.indexOf('fill="') !== -1) {
+            const startIndex = result.indexOf('fill="');
+            const firstQuote = result.indexOf('"', startIndex);
+            const secondQuote = result.indexOf('"', firstQuote + 1);
+
+            const removeFill = result.substring(startIndex, secondQuote + 1);
+            result = result.replace(removeFill, '');
+        }
+
+        if (result.indexOf('<path d="M872 27h18v18h-18z"/>') !== -1) {
+            result = result.replace('<path d="M872 27h18v18h-18z"/>', '');
+        }
+
+        return result;
     }
 
     addNewIcon() {
