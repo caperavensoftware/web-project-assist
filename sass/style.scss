@@ -82,3 +82,7 @@ router-view {
   @include flex-row();
   align-items: center;
 }
+
+.application-body {
+  display: flex;
+}

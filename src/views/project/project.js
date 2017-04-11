@@ -1,7 +1,6 @@
 import {ViewBase} from './../view-base';
 import {generateClass, generateComponent, generateView} from './../../lib/code-gen';
 import assistHtml from './project-assist.html!text';
-import {NewComponent} from './new-component';
 import {TaskRunner} from './../../lib/task-runner';
 import buildAll from './../../../../tasks/build-all.json!text';
 import runServer from './../../../../tasks/run-server.json!text';
