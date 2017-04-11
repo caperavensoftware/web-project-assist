@@ -2,8 +2,8 @@
   "type": "views",
   "fields": [
     {
-      "field": "code",
-      "map": "onkey_code"
+      "field": "svgText",
+      "map": "svgText"
     }
   ],
   "body": {
@@ -22,11 +22,26 @@
             "elements": [
               {
                 "element": "div",
-                "styles": ["svg-preview-container"]
+                "styles": ["svg-preview-container"],
+                "elements": [
+                  {
+                    "element": "svg",
+                    "attributes": {
+                      "ref": "svgContainer",
+                      "width": "6rem",
+                      "height": "6rem",
+                      "xmlns": "http://www.w3.org/2000/svg",
+                      "xmlns:xlink":"http://www.w3.org/1999/xlink"
+                    }
+                  }
+                ]
               },
               {
                 "element": "textarea",
-                "styles": ["stretch"]
+                "styles": ["stretch"],
+                "attributes": {
+                  "value.bind": "svgText"
+                }
               }
             ]
           }
