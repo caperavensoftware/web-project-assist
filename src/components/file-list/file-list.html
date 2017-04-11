@@ -1,6 +1,11 @@
 <template>
     <h3>Available Templates</h3>
     <ul selectable="selected-id.two-way: selectedId">
-        <li repeat.for="file of files" data-id="${file.id}">${file.name}</li>
+        <li repeat.for="file of files" data-id="${file.id}">
+            <div class="center-aligned-row no-mouse">
+                <div>${file.name}</div>
+                <div class="active-service" if.bind="selectedFile == file.name"></div>
+            </div>
+        </li>
     </ul>
 </template>

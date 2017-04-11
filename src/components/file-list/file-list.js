@@ -23,10 +23,14 @@ export class FileList {
         fs.readdir(path, (err, files) => {
             if (files) {
                 this.files = files.map((value, index) => {
-                    return {
-                        name: value,
-                        id: index
+                    if (value[0] !== "." && value !== "screen-templates.json") {
+                        return {
+                            name: value,
+                            id: index
+                        }
                     }
+                }).filter(file => {
+                    return file != undefined;
                 });
             }
         });

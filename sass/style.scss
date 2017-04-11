@@ -87,3 +87,7 @@ router-view {
 .application-body {
   display: flex;
 }
+
+.no-mouse {
+  pointer-events: none;
+}
