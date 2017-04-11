@@ -7,7 +7,7 @@
     "elements": [
       {
         "element": "div",
-        "styles": ["fullsize"],
+        "styles": ["fullsize-flex"],
         "elements": [
           {
             "element": "div",
