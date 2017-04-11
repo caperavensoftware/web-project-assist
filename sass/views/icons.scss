@@ -1,0 +1,17 @@
+@import '../../jspm_packages/npm/pragma-views@0.0.11/scss/lib/mixins';
+
+.icon-list {
+  width: 10rem;
+  background: green;
+}
+
+.icon-def {
+  @include stretch();
+  background: blue;
+}
+
+.svg-preview-container {
+  width: 100%;
+  height: 10rem;
+  background: deeppink;
+}

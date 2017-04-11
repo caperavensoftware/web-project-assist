@@ -1,0 +1,37 @@
+{
+  "type": "views",
+  "fields": [
+    {
+      "field": "code",
+      "map": "onkey_code"
+    }
+  ],
+  "body": {
+    "elements": [
+      {
+        "element": "div",
+        "styles": ["fullsize-flex"],
+        "elements": [
+          {
+            "element": "div",
+            "styles": ["icon-list"]
+          },
+          {
+            "element": "div",
+            "styles": ["icon-def", "container", "vertical"],
+            "elements": [
+              {
+                "element": "div",
+                "styles": ["svg-preview-container"]
+              },
+              {
+                "element": "textarea",
+                "styles": ["stretch"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
