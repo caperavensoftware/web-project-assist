@@ -4,17 +4,24 @@ import template from './../../../../screen-templates/icons.json!text';
 import {DynamicViewLoader} from 'pragma-views/lib/dynamic-view-loader';
 import {TemplateParser} from 'pragma-views/lib/template-parser';
 import assistHtml from './icons-assist.html!text';
+import {WebProject} from './../../lib/web-project';
 
+const fs = require("fs");
 const SVGO = require('svgo');
 
-@inject(TemplateParser, DynamicViewLoader, EventAggregator)
+@inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject)
 export class Icons {
     @bindable svgText;
 
-    constructor(templateParser, dynamicViewLoader, eventAggregator) {
+    constructor(templateParser, dynamicViewLoader, eventAggregator, webProject) {
         this.templateParser = templateParser;
         this.dynamicViewLoader = dynamicViewLoader;
         this.eventAggregator = eventAggregator;
+        this.webProject = webProject;
+
+        const iconsFilePath = `${this.webProject.currentProjectPath}/src/components/icons/icons.html`;
+        this.iconsFile = new IconsFile(iconsFilePath);
+        this.iconsFile.load();
     }
 
     svgTextChanged() {
@@ -28,7 +35,7 @@ export class Icons {
             this.svgText = result.data;
 
             const svgData = {
-                viewBox: this.getViewBox(),
+                viewBox: getViewBox(this.svgText),
                 innerSvg: this.getInnerSVG()
             };
 
@@ -36,14 +43,6 @@ export class Icons {
             this.svgContainer.innerHTML = svgData.innerSvg;
             this.svgText = this.svgContainer.outerHTML;
         });
-    }
-
-    getViewBox() {
-        const startIndex = this.svgText.indexOf('viewBox');
-        const firstQuote = this.svgText.indexOf('"', startIndex);
-        const secondQuote = this.svgText.indexOf('"', firstQuote + 1);
-
-        return this.svgText.substring(startIndex, secondQuote);
     }
 
     getInnerSVG() {
@@ -90,5 +89,65 @@ export class Icons {
             view: assistHtml,
             viewModel: this
         })
+    }
+}
+
+function getViewBox(text) {
+    const startIndex = text.indexOf('viewBox');
+    const firstQuote = text.indexOf('"', startIndex);
+    const secondQuote = text.indexOf('"', firstQuote + 1);
+
+    return text.substring(startIndex, secondQuote);
+}
+
+function getId(text) {
+    const startIndex = text.indexOf('id');
+    const firstQuote = text.indexOf('"', startIndex);
+    const secondQuote = text.indexOf('"', firstQuote + 1);
+
+    return text.substring(firstQuote + 1, secondQuote);
+}
+
+class IconsFile {
+    icons;
+
+    constructor(filePath) {
+        this.filePath = filePath;
+        this.icons = [];
+    }
+
+    load() {
+        const result = fs.readFileSync(this.filePath, 'utf8')
+        const array = result.split('\n');
+
+        let icon;
+        let busyProcessing = false;
+
+        for(let line of array) {
+            if (line.indexOf('</symbol') > -1) {
+                this.icons.push(icon);
+                busyProcessing = false;
+            }
+
+            if (busyProcessing) {
+                icon.innerSvg += line.trim();
+            }
+
+            if (line.indexOf('<symbol') > -1) {
+                icon = {
+                    name: getId(line),
+                    viewBox: getViewBox(line).split('"')[1],
+                    innerSvg: ""
+                };
+
+                busyProcessing = true;
+            }
+        }
+
+        console.log(this.icons);
+    }
+
+    save() {
+
     }
 }
