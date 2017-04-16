@@ -12,6 +12,7 @@ const SVGO = require('svgo');
 @inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject)
 export class Icons {
     @bindable svgText;
+    @bindable selectedId;
 
     constructor(templateParser, dynamicViewLoader, eventAggregator, webProject) {
         this.templateParser = templateParser;
@@ -26,6 +27,14 @@ export class Icons {
 
     svgTextChanged() {
         console.log(this.svgText);
+    }
+
+    selectedIdChanged() {
+        const obj = this.iconsFile.icons.find(icon => icon.id == this.selectedId);
+
+        this.svgContainer.setAttribute("viewBox", obj.viewBox);
+        this.svgContainer.innerHTML = obj.innerSvg;
+        this.svgText = `<svg viewBox="${obj.viewBox}">${obj.innerSvg}</svg>`;
     }
 
     cleanSVG() {
@@ -117,7 +126,7 @@ class IconsFile {
     }
 
     load() {
-        const result = fs.readFileSync(this.filePath, 'utf8')
+        const result = fs.readFileSync(this.filePath, 'utf8');
         const array = result.split('\n');
 
         let icon;
@@ -125,6 +134,7 @@ class IconsFile {
 
         for(let line of array) {
             if (line.indexOf('</symbol') > -1) {
+                icon.id = this.icons.length;
                 this.icons.push(icon);
                 busyProcessing = false;
             }
@@ -143,8 +153,6 @@ class IconsFile {
                 busyProcessing = true;
             }
         }
-
-        console.log(this.icons);
     }
 
     save() {

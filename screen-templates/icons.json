@@ -14,7 +14,39 @@
         "elements": [
           {
             "element": "div",
-            "styles": ["icon-list"]
+            "styles": ["icon-list"],
+            "elements": [
+              {
+                "element": "ul",
+                "attributes": {
+                  "selectable" :"selected-id.two-way: selectedId"
+                },
+                "elements": [
+                  {
+                    "element": "li",
+                    "attributes": {
+                      "repeat.for": "icon of iconsFile.icons",
+                      "data-id": "${icon.id}"
+                    },
+                    "styles": ["icon-li"],
+                    "elements": [
+                      {
+                        "element": "icon",
+                        "attributes": {
+                          "name": "${icon.name}"
+                        },
+                        "styles": ["no-mouse"]
+                      },
+                      {
+                        "element": "div",
+                        "content": "${icon.name}",
+                        "styles": ["no-mouse"]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           },
           {
             "element": "div",

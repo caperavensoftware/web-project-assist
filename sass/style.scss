@@ -92,3 +92,34 @@ router-view {
 .no-mouse {
   pointer-events: none;
 }
+
+.icon-li {
+  @include flex();
+  @include flex-row();
+  align-items: center;
+  cursor: pointer;
+
+  icon, .icon {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  div {
+    @include stretch();
+  }
+}
+
+.assist-container {
+  button {
+    display: block;
+    color: white;
+    opacity: 0.8;
+  }
+}
+
+h3 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
