@@ -37,7 +37,7 @@
                       {
                         "element": "icon",
                         "attributes": {
-                          "name": "${icon.name}"
+                          "data-name": "${icon.name}"
                         },
                         "styles": ["no-mouse"]
                       },

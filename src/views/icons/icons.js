@@ -127,7 +127,7 @@ export class Icons {
         this.eventAggregator.publish("assistant", {
             view: assistHtml,
             viewModel: this
-        })
+        });
     }
 }
 
