@@ -98,6 +98,7 @@ router-view {
   @include flex-row();
   align-items: center;
   cursor: pointer;
+  margin-bottom: 1rem;
 
   icon, .icon {
     width: 2rem;

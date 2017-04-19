@@ -65,18 +65,17 @@ export class Icons {
         svgo.optimize(this.svgText, result => {
             this.svgText = result.data;
 
-            this.model.viewBox = getViewBox(result.data);
-            this.model.innerSvg = result.data;
+            this.model.viewBox = getViewBox(result.data).split('"')[1];
+            this.model.innerSvg = this.getInnerSVG(result.data);
 
-            this.svgContainer.setAttribute("viewBox", this.model.viewBox.split('"')[1]);
+            this.svgContainer.setAttribute("viewBox", this.model.viewBox);
             this.svgContainer.innerHTML = this.model.innerSvg;
-            this.svgText = this.model.innerSvg;
 
-            this.model.svgText = this.svgText;
+            this.model.svgText = result.data;
         });
     }
 
-    getInnerSVG() {
+    getInnerSVG(svg) {
         const startIndex = this.svgText.indexOf('>') + 1;
         const nextIndex = this.svgText.indexOf('</svg>');
 
@@ -85,11 +84,6 @@ export class Icons {
 
     cleanInnerSVG(svg) {
         let result = svg;
-
-        if (result.indexOf('<g opacity=".8" fill="none" fill-rule="evenodd">') !== -1) {
-            result = result.replace('<g opacity=".8" fill="none" fill-rule="evenodd">', '');
-            result = result.replace('</g>', '');
-        }
 
         if (result.indexOf('fill="') !== -1) {
             const startIndex = result.indexOf('fill="');
@@ -110,6 +104,7 @@ export class Icons {
             }
 
             this.iconsFile.save();
+            this.model.state = iconStates.edit;
         }
     }
 
@@ -191,12 +186,12 @@ class IconsFile {
         for(let icon of this.icons) {
             let symbol = symbolBody.slice(0).replace("__name__", icon.name);
             symbol = symbol.replace("__viewbox__", icon.viewBox);
-            symbol = symbol.replace("__path__", icon.innerSvg);
+            symbol = symbol.replace("__paths__", icon.innerSvg);
 
             list.push(symbol);
         }
 
-        const body = symbolBody.slice(0).replace("__paths__", list.join(""));
+        const body = templateBody.slice(0).replace("__symbols__", list.join(""));
         fs.writeFileSync(this.filePath, body);
     }
 }
@@ -212,8 +207,8 @@ const templateBody =
 
 const symbolBody =
 `
-<symbol id="__name__" viewBox="__viewbox__">
-    __paths__
-</symbol>
+        <symbol id="__name__" viewBox="__viewbox__">
+            __paths__
+        </symbol>
 `;
 
