@@ -9,13 +9,29 @@ import {WebProject} from './../../lib/web-project';
 const fs = require("fs");
 const SVGO = require('svgo');
 
+class Icon {
+    name;
+    viewBox;
+    innerSvg;
+    svgText;
+
+    constructor(name, viewBox, innerSvg) {
+        this.name = name;
+        this.viewBox = viewBox;
+        this.innerSvg = innerSvg;
+        this.svgText = "";
+    }
+}
+
 @inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject)
 export class Icons {
-    @bindable svgText;
     @bindable selectedId;
+    @bindable model;
 
     constructor(templateParser, dynamicViewLoader, eventAggregator, webProject) {
         this.templateParser = templateParser;
+        this.templateParser.propertyPrefix = "model";
+
         this.dynamicViewLoader = dynamicViewLoader;
         this.eventAggregator = eventAggregator;
         this.webProject = webProject;
@@ -23,18 +39,16 @@ export class Icons {
         const iconsFilePath = `${this.webProject.currentProjectPath}/src/components/icons/icons.html`;
         this.iconsFile = new IconsFile(iconsFilePath);
         this.iconsFile.load();
-    }
 
-    svgTextChanged() {
-        console.log(this.svgText);
+        this.newIcon();
     }
 
     selectedIdChanged() {
-        const obj = this.iconsFile.icons.find(icon => icon.id == this.selectedId);
+        this.model = this.iconsFile.icons.find(icon => icon.id == this.selectedId);
 
-        this.svgContainer.setAttribute("viewBox", obj.viewBox);
-        this.svgContainer.innerHTML = obj.innerSvg;
-        this.svgText = `<svg viewBox="${obj.viewBox}">${obj.innerSvg}</svg>`;
+        this.svgContainer.setAttribute("viewBox", this.model.viewBox);
+        this.svgContainer.innerHTML = this.model.innerSvg;
+        this.svgText = `<svg viewBox="${this.model.viewBox}">${this.model.innerSvg}</svg>`;
     }
 
     cleanSVG() {
@@ -81,12 +95,19 @@ export class Icons {
         return result;
     }
 
-    addNewIcon() {
-        console.log("new icon");
+    save() {
+        console.log("save");
     }
 
-    updateIcons() {
-        console.log("update icon");
+    newIcon() {
+        this.model = new Icon("undefined", "", "");
+
+        if (this.svgContainer) {
+            this.svgContainer.setAttribute("viewBox", "");
+            this.svgContainer.innerHTML = "";
+        }
+
+        this.svgText = "";
     }
 
     attached() {
@@ -127,7 +148,7 @@ class IconsFile {
 
     load() {
         const result = fs.readFileSync(this.filePath, 'utf8');
-        const array = result.split('\n');
+         const array = result.split('\n');
 
         let icon;
         let busyProcessing = false;
@@ -144,12 +165,7 @@ class IconsFile {
             }
 
             if (line.indexOf('<symbol') > -1) {
-                icon = {
-                    name: getId(line),
-                    viewBox: getViewBox(line).split('"')[1],
-                    innerSvg: ""
-                };
-
+                icon = new Icon(getId(line), getViewBox(line).split('"')[1], "");
                 busyProcessing = true;
             }
         }

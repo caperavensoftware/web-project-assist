@@ -4,6 +4,10 @@
     {
       "field": "svgText",
       "map": "svgText"
+    },
+    {
+      "field": "name",
+      "map": "name"
     }
   ],
   "body": {
@@ -67,6 +71,14 @@
                     }
                   }
                 ]
+              },
+              {
+                "title": "Icon Name",
+                "field": "name",
+                "element": "input",
+                "attributes": {
+                  "type": "text"
+                }
               },
               {
                 "element": "textarea",
