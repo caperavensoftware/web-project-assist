@@ -9,13 +9,20 @@ import {WebProject} from './../../lib/web-project';
 const fs = require("fs");
 const SVGO = require('svgo');
 
+const iconStates = {
+    new: 0,
+    edit: 1
+};
+
 class Icon {
     name;
     viewBox;
     innerSvg;
     svgText;
+    state;
 
-    constructor(name, viewBox, innerSvg) {
+    constructor(name, viewBox, innerSvg, state) {
+        this.state = state;
         this.name = name;
         this.viewBox = viewBox;
         this.innerSvg = innerSvg;
@@ -45,6 +52,7 @@ export class Icons {
 
     selectedIdChanged() {
         this.model = this.iconsFile.icons.find(icon => icon.id == this.selectedId);
+        this.model.state = iconStates.edit;
 
         this.svgContainer.setAttribute("viewBox", this.model.viewBox);
         this.svgContainer.innerHTML = this.model.innerSvg;
@@ -57,14 +65,14 @@ export class Icons {
         svgo.optimize(this.svgText, result => {
             this.svgText = result.data;
 
-            const svgData = {
-                viewBox: getViewBox(this.svgText),
-                innerSvg: this.getInnerSVG()
-            };
+            this.model.viewBox = getViewBox(result.data);
+            this.model.innerSvg = result.data;
 
-            this.svgContainer.setAttribute("viewBox", svgData.viewBox.split('"')[1]);
-            this.svgContainer.innerHTML = svgData.innerSvg;
-            this.svgText = this.svgContainer.outerHTML;
+            this.svgContainer.setAttribute("viewBox", this.model.viewBox.split('"')[1]);
+            this.svgContainer.innerHTML = this.model.innerSvg;
+            this.svgText = this.model.innerSvg;
+
+            this.model.svgText = this.svgText;
         });
     }
 
@@ -96,11 +104,17 @@ export class Icons {
     }
 
     save() {
-        console.log("save");
+        if (this.model.innerSvg && this.model.viewBox && this.model.name != "undefined") {
+            if (this.model.state == iconStates.new) {
+                this.iconsFile.icons.push(new Icon(this.model.name, this.model.viewBox, this.model.innerSvg, this.model.state))
+            }
+
+            this.iconsFile.save();
+        }
     }
 
     newIcon() {
-        this.model = new Icon("undefined", "", "");
+        this.model = new Icon("undefined", "", "", iconStates.new);
 
         if (this.svgContainer) {
             this.svgContainer.setAttribute("viewBox", "");
@@ -165,13 +179,41 @@ class IconsFile {
             }
 
             if (line.indexOf('<symbol') > -1) {
-                icon = new Icon(getId(line), getViewBox(line).split('"')[1], "");
+                icon = new Icon(getId(line), getViewBox(line).split('"')[1], "", iconStates.edit);
                 busyProcessing = true;
             }
         }
     }
 
     save() {
+        const list = [];
 
+        for(let icon of this.icons) {
+            let symbol = symbolBody.slice(0).replace("__name__", icon.name);
+            symbol = symbol.replace("__viewbox__", icon.viewBox);
+            symbol = symbol.replace("__path__", icon.innerSvg);
+
+            list.push(symbol);
+        }
+
+        const body = symbolBody.slice(0).replace("__paths__", list.join(""));
+        fs.writeFileSync(this.filePath, body);
     }
 }
+
+const templateBody =
+`
+<template>
+    <svg style="display: none;">
+        __symbols__
+    </svg>
+</template>
+`;
+
+const symbolBody =
+`
+<symbol id="__name__" viewBox="__viewbox__">
+    __paths__
+</symbol>
+`;
+
