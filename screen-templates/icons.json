@@ -35,9 +35,10 @@
                     "styles": ["icon-li"],
                     "elements": [
                       {
-                        "element": "icon",
+                        "element": "svg",
                         "attributes": {
-                          "data-name": "${icon.name}"
+                          "viewBox": "${icon.viewBox}",
+                          "innerhtml.bind": "icon.innerSvg"
                         },
                         "styles": ["no-mouse"]
                       },
