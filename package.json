@@ -11,9 +11,9 @@
     "watch:ui": "gulp build:all && gulp watch:ui",
     "watch:all": "gulp build:all && gulp watch:all",
     "run": "gulp build:all && electron .",
-    "package": "electron-packager ./ WebProjectAssist --all --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite",
-    "package-mac": "electron-packager ./ WebProjectAssist -platform darwin --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite",
-    "package-windows": "electron-packager ./ WebProjectAssist -platform win32 --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite"
+    "package": "gulp build:all && electron-packager ./ WebProjectAssist --all --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite",
+    "package-mac": "gulp build:all && electron-packager ./ WebProjectAssist -platform darwin --out ~/Desktop/WebProjectAssist --electron-version 1.6.2 --overwrite",
+    "package-windows": "electron-packager ./ WebProjectAssist -platform win32 --out c:/temp/WebProjectAssist --electron-version 1.6.2 --overwrite"
   },
   "keywords": [],
   "author": "Johan Rabie",
