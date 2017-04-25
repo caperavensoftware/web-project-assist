@@ -12,6 +12,7 @@ import viewTestTemplate from './../../../templates/views/view-tests.js.template!
 
 export function generateClass(name, path, systemPath) {
     const className = createClassName(name);
+    const classFileName = createFileName(name);
 
     const codeResult = populateTemplate(classTemplate, {
         "__classname__": className
@@ -19,10 +20,9 @@ export function generateClass(name, path, systemPath) {
 
     const codeTestResult = populateTemplate(classTestTemplate, {
         "__classname__": className,
-        "__classpath__": path
+        "__classpath__": path,
+        "__classfilename__": classFileName
     });
-
-    const classFileName = createFileName(name);
 
     saveContentToFile(`${systemPath}/src/${path}`, `${classFileName}.js`, codeResult);
     saveContentToFile(`${systemPath}/test/${path}`, `${classFileName}-tests.js`, codeTestResult);
