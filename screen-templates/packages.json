@@ -10,17 +10,20 @@
     "elements": [
       {
         "element": "div",
+        "styles": ["fullsize"],
         "elements": [
           {
             "element": "ul",
             "attributes": {
               "selectable" :"selected-id.two-way: selectedId"
             },
+            "styles": ["fullsize"],
             "elements": [
               {
                 "element": "li",
                 "attributes": {
-                  "repeat.for": "item of items"
+                  "repeat.for": "item of items",
+                  "class.bind": "item.type != 4 ? 'package-list-item' : ''"
                 },
                 "styles": ["container", "horizontal"],
                 "elements": [
@@ -36,7 +39,8 @@
                     "content": "${item.name}",
                     "attributes": {
                       "class.bind": "item.type == 4 ? 'list-header' : ''"
-                    }
+                    },
+                    "styles": ["stretch"]
                   },
                   {
                     "element": "span",
