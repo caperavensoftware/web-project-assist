@@ -19,7 +19,7 @@ export class Packages {
         this.webProject = webProject;
 
         this.items = this.webProject.packageJson.getInstalledPackages();
-        console.log(this.items);
+        this.webProject.packageJson.getOutdatedPackages(this.items);
     }
 
     attached() {

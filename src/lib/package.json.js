@@ -1,4 +1,5 @@
 const fs = require("fs");
+const childProcess = require("child_process");
 
 export class PackageJson {
     packageObject;
@@ -12,6 +13,7 @@ export class PackageJson {
     }
 
     load(folder) {
+        this.folder = folder;
         const path = `${folder}/package.json`;
         const exists = fs.existsSync(path);
 
@@ -52,9 +54,50 @@ export class PackageJson {
         const names = Object.keys(objectToProcess);
 
         for (let name of names) {
-            array.push(new PackageItem(name, objectToProcess[name], type))
+            const value = objectToProcess[name];
+            const s = value.split("^");
+            const version = s.length == 1 ? s[0] : s[1];
+
+            array.push(new PackageItem(name, version, type))
         }
     }
+
+    getOutdatedPackages(packages) {
+        return new Promise((resolve) => {
+            const options = {
+                cwd: this.folder,
+            };
+
+            const command = "npm outdated";
+            let result = "";
+
+            const ls = childProcess.exec(command, options, (error, stdout, stderr) => {
+                result = stdout;
+            });
+
+            ls.on('close', _ => {
+                let outdated = result.split(/\r?\n/);
+
+                for(let item of outdated) {
+                    let itemDetails = item.split(" ").filter(e => e !== "");
+
+                    const name = itemDetails[0];
+                    const wanted = itemDetails[2];
+                    const newVersion = itemDetails[3];
+
+                    console.log(`${name} ${newVersion}`);
+
+                    const p = packages.find(e => e.name == name);
+                    if (p) {
+                        p.wantedVersion = wanted;
+                        p.newVersion = newVersion;
+                    }
+                }
+
+                resolve();
+            });
+        });
+    };
 }
 
 export const PackageType = {
@@ -67,12 +110,15 @@ export const PackageType = {
 export class PackageItem {
     name;
     version;
+    wantedVersion;
+    newVersion;
     type;
     isSelected;
 
     constructor(name, version, type) {
         this.name = name;
         this.version = version;
+        this.newVersion = "";
         this.type = type;
         this.isSelected = false;
     }

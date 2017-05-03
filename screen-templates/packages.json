@@ -17,13 +17,13 @@
             "attributes": {
               "selectable" :"selected-id.two-way: selectedId"
             },
-            "styles": ["fullsize"],
+            "styles": ["fullsize odd"],
             "elements": [
               {
                 "element": "li",
                 "attributes": {
                   "repeat.for": "item of items",
-                  "class.bind": "item.type != 4 ? 'package-list-item' : ''"
+                  "class.bind": "item.type != 4 ? 'package-list-item' : 'package-header'"
                 },
                 "styles": ["container", "horizontal"],
                 "elements": [
@@ -46,6 +46,14 @@
                     "element": "span",
                     "content": "${item.version}",
                     "styles": ["depreciated"]
+                  },
+                  {
+                    "element": "span",
+                    "content": "${item.newVersion}",
+                    "styles": ["outdated"],
+                    "attributes": {
+                      "if.bind": "item.newVersion.length > 0"
+                    }
                   }
                 ]
               }
