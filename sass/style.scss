@@ -131,6 +131,7 @@ h3 {
 }
 
 .list-header {
+  display: block;
   font-weight: bold;
   opacity: 0.8;
   margin-top: 0.5rem;
@@ -140,6 +141,12 @@ h3 {
 .package-list-item {
   checkbox {
     margin-right: 1rem;
+  }
+
+  label {
+    @include flex();
+    width: 100%;
+    cursor: pointer;
   }
 }
 

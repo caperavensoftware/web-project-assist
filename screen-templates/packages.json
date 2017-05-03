@@ -28,32 +28,37 @@
                 "styles": ["container", "horizontal"],
                 "elements": [
                   {
-                    "element": "checkbox",
-                    "attributes": {
-                      "checked.bind": "item.isSelected",
-                      "if.bind": "item.type != 4"
-                    }
-                  },
-                  {
-                    "element": "span",
-                    "content": "${item.name}",
-                    "attributes": {
-                      "class.bind": "item.type == 4 ? 'list-header' : ''"
-                    },
-                    "styles": ["stretch"]
-                  },
-                  {
-                    "element": "span",
-                    "content": "${item.version}",
-                    "styles": ["depreciated"]
-                  },
-                  {
-                    "element": "span",
-                    "content": "${item.newVersion}",
-                    "styles": ["outdated"],
-                    "attributes": {
-                      "if.bind": "item.newVersion.length > 0"
-                    }
+                    "element": "label",
+                    "elements": [
+                      {
+                        "element": "checkbox",
+                        "attributes": {
+                          "checked.bind": "item.isSelected",
+                          "if.bind": "item.type != 4"
+                        }
+                      },
+                      {
+                        "element": "span",
+                        "content": "${item.name}",
+                        "attributes": {
+                          "class.bind": "item.type == 4 ? 'list-header' : ''"
+                        },
+                        "styles": ["stretch"]
+                      },
+                      {
+                        "element": "span",
+                        "content": "${item.version}",
+                        "styles": ["depreciated"]
+                      },
+                      {
+                        "element": "span",
+                        "content": "${item.newVersion}",
+                        "styles": ["outdated"],
+                        "attributes": {
+                          "if.bind": "item.newVersion.length > 0"
+                        }
+                      }
+                    ]
                   }
                 ]
               }
