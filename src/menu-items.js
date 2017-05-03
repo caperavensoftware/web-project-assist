@@ -8,6 +8,10 @@ export const menuItems = [
         screen: "project"
     },
     {
+        text: "Packages",
+        screen: "packages"
+    },
+    {
         text: "Screen Template",
         screen: "screen-templates"
     },

@@ -1,0 +1,53 @@
+{
+  "type": "views",
+  "fields": [
+    {
+      "field": "code",
+      "map": "onkey_code"
+    }
+  ],
+  "body": {
+    "elements": [
+      {
+        "element": "div",
+        "elements": [
+          {
+            "element": "ul",
+            "attributes": {
+              "selectable" :"selected-id.two-way: selectedId"
+            },
+            "elements": [
+              {
+                "element": "li",
+                "attributes": {
+                  "repeat.for": "item of items"
+                },
+                "styles": ["container", "horizontal"],
+                "elements": [
+                  {
+                    "element": "checkbox",
+                    "attributes": {
+                      "checked.bind": "item.isSelected",
+                      "if.bind": "item.type != 4"
+                    }
+                  },
+                  {
+                    "element": "span",
+                    "content": "${item.name}",
+                    "attributes": {
+                      "class.bind": "item.type == 4 ? 'list-header' : ''"
+                    }
+                  },
+                  {
+                    "element": "span",
+                    "content": "${item.version}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
