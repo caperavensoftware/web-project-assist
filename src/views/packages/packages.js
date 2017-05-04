@@ -9,6 +9,8 @@ import {WebProject} from './../../lib/web-project';
 export class Packages {
     @bindable selectedId;
     @bindable items;
+    @bindable busyText;
+    @bindable isBusy;
 
     constructor(templateParser, dynamicViewLoader, eventAggregator, webProject) {
         this.templateParser = templateParser;
@@ -17,9 +19,12 @@ export class Packages {
         this.dynamicViewLoader = dynamicViewLoader;
         this.eventAggregator = eventAggregator;
         this.webProject = webProject;
+        this.busyText = "Please wait while fetching package information";
+        this.isBusy = true;
 
         this.items = this.webProject.packageJson.getInstalledPackages();
-        this.webProject.packageJson.getOutdatedPackages(this.items);
+        this.webProject.packageJson.getOutdatedPackages(this.items).then(_ => this.isBusy = false);
+
     }
 
     attached() {

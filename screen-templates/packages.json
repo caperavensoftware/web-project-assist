@@ -65,6 +65,14 @@
             ]
           }
         ]
+      },
+      {
+        "element": "div",
+        "styles": ["busy"],
+        "content": "${busyText}",
+        "attributes": {
+          "if.bind": "isBusy"
+        }
       }
     ]
   }
