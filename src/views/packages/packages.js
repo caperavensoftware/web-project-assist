@@ -73,8 +73,20 @@ export class Packages {
         };
 
         for (let item of selected) {
+            item.version = item.newVersion;
+            item.newVersion = "";
+            item.isSelected = false;
+
+            let saveOption = "";
+            if (item.type == 1) {
+                saveOption = "--save-dev";
+            }
+            else if (item.type == 2) {
+                saveOption = "--save";
+            }
+
             tasks.tasks.push({
-                "command": `npm install ${item.name}@latest`,
+                "command": `npm install ${item.name}@latest ${saveOption}`,
                 "description": `installing ${item.name}`
             })
         }

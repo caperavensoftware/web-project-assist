@@ -85,8 +85,6 @@ export class PackageJson {
                     const wanted = itemDetails[2];
                     const newVersion = itemDetails[3];
 
-                    console.log(`${name} ${newVersion}`);
-
                     const p = packages.find(e => e.name == name);
                     if (p) {
                         p.wantedVersion = wanted;

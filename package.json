@@ -24,9 +24,9 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",
-    "build-utilities": "0.0.127",
+    "build-utilities": "0.0.129",
     "devtron": "^1.4.0",
-    "electron-packager": "^8.6.0"
+    "electron-packager": "^8.7.0"
   },
   "jspm": {
     "dependencies": {
@@ -43,7 +43,8 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "codemirror": "^5.25.0",
+    "babel-loader": "^7.0.0",
+    "codemirror": "^5.25.2",
     "fix-path": "^2.1.0",
     "mkdirp": "^0.5.1",
     "svgo": "^0.7.2"
