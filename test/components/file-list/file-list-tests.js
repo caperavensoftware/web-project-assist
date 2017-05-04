@@ -17,4 +17,4 @@ describe('FileList Tests', function() {
     it('not constructor', function() {
         expect(() => FileList()).to.throw("Cannot call a class as a function");
     });    
-})
+});

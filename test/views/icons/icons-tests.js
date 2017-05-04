@@ -17,4 +17,4 @@ describe('Icons Tests', function() {
     it('not constructor', function() {
         expect(() => Icons()).to.throw("Cannot call a class as a function");
     });    
-})
+});

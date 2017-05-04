@@ -55,8 +55,7 @@ export class ScreenTemplates{
     detached() {
         if (this.previewElement) {
             this.dynamicViewLoader.disposeFor(this.previewElement)
-        };
-
+        }
         this.dynamicViewLoader.disposeFor(this.genContainer);
     }
 

@@ -17,4 +17,4 @@ describe('ScreenTemplates Tests', function() {
     it('not constructor', function() {
         expect(() => ScreenTemplates()).to.throw("Cannot call a class as a function");
     });    
-})
+});

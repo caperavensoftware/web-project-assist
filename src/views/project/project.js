@@ -89,7 +89,7 @@ export class Project extends ViewBase {
     }
 
     performCreateComponent() {
-        generateComponent(this.newItem.name, this.webProject.currentProjectPath)
+        generateComponent(this.newItem.name, this.webProject.currentProjectPath);
         this.newItem.name = "";
         this.hideComponent();
         alert("component created");

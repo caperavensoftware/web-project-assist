@@ -17,4 +17,4 @@ describe('TaskRunner Tests', function() {
     it('not constructor', function() {
         expect(() => TaskRunner()).to.throw("Cannot call a class as a function");
     });    
-})
+});

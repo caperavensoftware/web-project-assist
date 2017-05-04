@@ -2,8 +2,8 @@
   "type": "views",
   "fields": [
     {
-      "field": "code",
-      "map": "onkey_code"
+      "field": "name",
+      "map": "name"
     }
   ],
   "body": {
@@ -73,6 +73,96 @@
         "attributes": {
           "if.bind": "isBusy"
         }
+      },
+      {
+        "element": "div",
+        "styles": ["install-package", "container", "vertical", "closed"],
+        "attributes": {
+          "ref": "installpackages"
+        },
+        "elements": [
+          {
+            "element": "input",
+            "title": "Install packages",
+            "field": "name"
+          },
+          {
+            "element": "input-composite",
+            "attributes": {
+              "label": "Package Type"
+            },
+            "elements": [
+              {
+                "element": "select",
+                "elements": [
+                  {
+                    "element": "option",
+                    "attributes": {
+                      "id": "npm"
+                    },
+                    "content": "npm"
+                  },
+                  {
+                    "element": "option",
+                    "attributes": {
+                      "id": "jspm"
+                    },
+                    "content": "jspm"
+                  }
+                ],
+                "attributes": {
+                  "value.bind": "model.packageType"
+                }
+              }
+            ]
+          },
+          {
+            "element": "input-composite",
+            "attributes": {
+              "label": "Dependency"
+            },
+            "elements": [
+              {
+                "element": "select",
+                "elements": [
+                  {
+                    "element": "option",
+                    "attributes": {
+                      "id": "1"
+                    },
+                    "content": "dev dependency"
+                  },
+                  {
+                    "element": "option",
+                    "attributes": {
+                      "id": "2"
+                    },
+                    "content": "app dependency"
+                  }
+                ],
+                "attributes": {
+                  "value.bind": "model.dependency"
+                }
+              }
+            ]
+          },
+          {
+            "element": "div",
+            "styles": "container horizontal align-right",
+            "elements": [
+              {
+                "element": "button",
+                "title": "Install",
+                "action": "installPackage"
+              },
+              {
+                "element": "button",
+                "title": "Cancel",
+                "action": "cancelInstallPackage()"
+              }
+            ]
+          }
+        ]
       }
     ]
   }

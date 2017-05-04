@@ -15,6 +15,7 @@ export class Packages {
     @bindable items;
     @bindable busyText;
     @bindable isBusy;
+    @bindable model;
 
     constructor(templateParser, dynamicViewLoader, eventAggregator, webProject) {
         this.templateParser = templateParser;
@@ -36,6 +37,12 @@ export class Packages {
         this.eventEmitter.on("description", this.describeHanddler);
         this.eventEmitter.on("done", this.doneHandler);
         this.taskRunner = new TaskRunner(this.webProject.currentProjectPath, this.eventEmitter);
+
+        this.model = {
+            name: "",
+            packageType: "npm",
+            dependency: "dev dependency"
+        };
     }
 
     describe(args) {
@@ -95,10 +102,55 @@ export class Packages {
     }
 
     removeSelected() {
+        const selected = this.items.filter(i => i.isSelected);
 
+        this.isBusy = selected.length > 0;
+
+        const tasks = {
+            "name": "Install packages",
+            "tasks": [
+
+            ]
+        };
+
+        for (let item of selected) {
+            let dependency = "";
+
+            if(item.type != 3) {
+                dependency = item.type == 1 ? "--save-dev" : "--save";
+            }
+
+            let command = `${item.type == 3 ? "jspm" : "npm"} uninstall ${item.name} ${dependency}`;
+
+            tasks.tasks.push({
+                "command": command,
+                "description": `uninstalling ${item.name}`
+            })
+        }
+
+        this.taskRunner.runTasks(JSON.stringify(tasks), "uninstalling package");
+        this.items = this.items.filter(i => !i.isSelected);
     }
 
     installNew() {
+        this.installpackages.classList.remove("closed");
+        document.getElementById("name_input").focus();
+    }
 
+    cancelInstallPackage() {
+        this.installpackages.classList.add("closed");
+    }
+
+    installPackage() {
+        let dependency = "";
+
+        if (this.model.packageType == "npm") {
+            dependency = this.model.dependency == "dev dependency" ? "--save-dev" : "--save";
+        }
+
+        const installCommand = `${this.model.packageType} install ${this.model.name} ${dependency}`;
+
+        this.taskRunner.execCommand({command: installCommand});
+        this.cancelInstallPackage();
     }
 }
