@@ -33,7 +33,7 @@
                       {
                         "element": "checkbox",
                         "attributes": {
-                          "checked.bind": "item.isSelected",
+                          "checked.two-way": "item.isSelected",
                           "if.bind": "item.type != 4"
                         }
                       },

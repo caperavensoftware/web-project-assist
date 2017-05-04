@@ -4,6 +4,10 @@ import template from './../../../../screen-templates/packages.json!text';
 import {DynamicViewLoader} from 'pragma-views/lib/dynamic-view-loader';
 import {TemplateParser} from 'pragma-views/lib/template-parser';
 import {WebProject} from './../../lib/web-project';
+import assist from './packages-assist.html!text';
+import {TaskRunner} from './../../lib/task-runner';
+
+const EventEmitter = require('events');
 
 @inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject)
 export class Packages {
@@ -25,6 +29,21 @@ export class Packages {
         this.items = this.webProject.packageJson.getInstalledPackages();
         this.webProject.packageJson.getOutdatedPackages(this.items).then(_ => this.isBusy = false);
 
+        this.describeHanddler = this.describe.bind(this);
+        this.doneHandler = this.done.bind(this);
+
+        this.eventEmitter = new EventEmitter();
+        this.eventEmitter.on("description", this.describeHanddler);
+        this.eventEmitter.on("done", this.doneHandler);
+        this.taskRunner = new TaskRunner(this.webProject.currentProjectPath, this.eventEmitter);
+    }
+
+    describe(args) {
+        this.busyText = args;
+    }
+
+    done() {
+        this.isBusy = false;
     }
 
     attached() {
@@ -33,11 +52,41 @@ export class Packages {
         });
 
         this.eventAggregator.publish("assistant", {
-            view: "",
+            view: assist,
             viewModel: this
         });
     }
 
     detached() {
+    }
+
+    updateSelected() {
+        const selected = this.items.filter(i => i.isSelected);
+
+        this.isBusy = selected.length > 0;
+
+        const tasks = {
+            "name": "Install packages",
+            "tasks": [
+
+            ]
+        };
+
+        for (let item of selected) {
+            tasks.tasks.push({
+                "command": `npm install ${item.name}@latest`,
+                "description": `installing ${item.name}`
+            })
+        }
+
+        this.taskRunner.runTasks(JSON.stringify(tasks), "installing package")
+    }
+
+    removeSelected() {
+
+    }
+
+    installNew() {
+
     }
 }
