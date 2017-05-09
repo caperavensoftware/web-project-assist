@@ -74,7 +74,7 @@ export class Project extends ViewBase {
             return;
         }
 
-        generateClass(this.newItem.name, this.newItem.path, this.webProject.currentProjectPath);
+        generateClass(this.newItem.name, this.newItem.path, this.webProject.currentProjectPath, this.taskRunner);
         this.newItem.name = "";
         this.hideClass();
         alert("class created");
@@ -89,7 +89,7 @@ export class Project extends ViewBase {
     }
 
     performCreateComponent() {
-        generateComponent(this.newItem.name, this.webProject.currentProjectPath);
+        generateComponent(this.newItem.name, this.webProject.currentProjectPath, this.taskRunner);
         this.newItem.name = "";
         this.hideComponent();
         alert("component created");
@@ -112,7 +112,7 @@ export class Project extends ViewBase {
     }
 
     performCreateView() {
-        generateView(this.newItem.name, this.webProject.currentProjectPath);
+        generateView(this.newItem.name, this.webProject.currentProjectPath, this.taskRunner);
         this.newItem.name = "";
         this.hideView();
         alert("view created");

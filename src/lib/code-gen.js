@@ -1,6 +1,7 @@
 const fs = require("fs");
 const dir = require('mkdirp');
 
+import {inject} from "aurelia-framework";
 import classTemplate from './../../../templates/class/class.js.template!text';
 import classTestTemplate from './../../../templates/class/class-test.js.template!text';
 import componentTemplate from './../../../templates/control/control.js.template!text';
@@ -10,7 +11,7 @@ import viewTemplate from './../../../templates/views/view.js.template!text';
 import viewHtmlTemplate from './../../../templates/views/view.html.template!text';
 import viewTestTemplate from './../../../templates/views/view-tests.js.template!text';
 
-export function generateClass(name, path, systemPath) {
+export function generateClass(name, path, systemPath, taskRunner) {
     const className = createClassName(name);
     const classFileName = createFileName(name);
 
@@ -24,11 +25,11 @@ export function generateClass(name, path, systemPath) {
         "__classfilename__": classFileName
     });
 
-    saveContentToFile(`${systemPath}/src/${path}`, `${classFileName}.js`, codeResult);
-    saveContentToFile(`${systemPath}/test/${path}`, `${classFileName}-tests.js`, codeTestResult);
+    saveContentToFile(`${systemPath}/src/${path}`, `${classFileName}.js`, codeResult, taskRunner);
+    saveContentToFile(`${systemPath}/test/${path}`, `${classFileName}-tests.js`, codeTestResult, taskRunner);
 }
 
-export function generateComponent(name, systemPath) {
+export function generateComponent(name, systemPath, taskRunner) {
     const className = createClassName(name);
     const tagName = createFileName(name);
 
@@ -42,12 +43,12 @@ export function generateComponent(name, systemPath) {
         "__classname__": className
     });
 
-    saveContentToFile(`${systemPath}/src/components/${tagName}`, `${tagName}.js`, componentResult);
-    saveContentToFile(`${systemPath}/src/components/${tagName}`, `${tagName}.html`, componentHtmlTemplate);
-    saveContentToFile(`${systemPath}/test/components/${tagName}`, `${tagName}-tests.js`, componentTestResult);
+    saveContentToFile(`${systemPath}/src/components/${tagName}`, `${tagName}.js`, componentResult, taskRunner);
+    saveContentToFile(`${systemPath}/src/components/${tagName}`, `${tagName}.html`, componentHtmlTemplate, taskRunner);
+    saveContentToFile(`${systemPath}/test/components/${tagName}`, `${tagName}-tests.js`, componentTestResult, taskRunner);
 }
 
-export function generateView(name, systemPath) {
+export function generateView(name, systemPath, taskRunner) {
     const className = createClassName(name);
     const tagName = createFileName(name);
 
@@ -60,19 +61,33 @@ export function generateView(name, systemPath) {
         "__classname__": className
     });
 
-    saveContentToFile(`${systemPath}/src/views/${tagName}`, `${tagName}.js`, viewResult);
-    saveContentToFile(`${systemPath}/src/views/${tagName}`, `${tagName}.html`, viewHtmlTemplate);
-    saveContentToFile(`${systemPath}/test/views/${tagName}`, `${tagName}-tests.js`, viewTestResult);
+    saveContentToFile(`${systemPath}/src/views/${tagName}`, `${tagName}.js`, viewResult, taskRunner);
+    saveContentToFile(`${systemPath}/src/views/${tagName}`, `${tagName}.html`, viewHtmlTemplate, taskRunner);
+    saveContentToFile(`${systemPath}/test/views/${tagName}`, `${tagName}-tests.js`, viewTestResult, taskRunner);
 }
 
-function saveContentToFile(path, file, content) {
+function saveContentToFile(path, file, content, taskRunner) {
     const saveCodePath = `${path}/${file}`;
     dir.sync(`${path}`);
+
+    const tasks = {
+        "name": "Install packages",
+        "tasks": [
+
+        ]
+    };
 
     fs.writeFile(saveCodePath, content,  error => {
         if (error) {
             throw error;
         }
+
+        tasks.tasks.push({
+            "command": `git add ${saveCodePath}`,
+            "description": `git adding ${saveCodePath}`
+        });
+
+        taskRunner.runTasks(JSON.stringify(tasks), "adding git files");
     });
 }
 
