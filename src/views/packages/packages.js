@@ -6,10 +6,12 @@ import {TemplateParser} from 'pragma-views/lib/template-parser';
 import {WebProject} from './../../lib/web-project';
 import assist from './packages-assist.html!text';
 import {TaskRunner} from './../../lib/task-runner';
+import {DialogService} from 'aurelia-dialog';
+import {InstallPackage} from './../install-package/install-package';
 
 const EventEmitter = require('events');
 
-@inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject)
+@inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject, DialogService)
 export class Packages {
     @bindable selectedId;
     @bindable items;
@@ -17,7 +19,8 @@ export class Packages {
     @bindable isBusy;
     @bindable model;
 
-    constructor(templateParser, dynamicViewLoader, eventAggregator, webProject) {
+    constructor(templateParser, dynamicViewLoader, eventAggregator, webProject, dialogService) {
+        this.dialogService = dialogService;
         this.templateParser = templateParser;
         this.templateParser.propertyPrefix = "model";
 
@@ -65,6 +68,15 @@ export class Packages {
     }
 
     detached() {
+    }
+
+    showInstallPackages() {
+        this.dialogService.open({viewModel: InstallPackage, model: this.model})
+            .whenClosed(resposne => {
+                if (!resposne.wasCancelled) {
+                    this.installPackage();
+                }
+            });
     }
 
     updateSelected() {
@@ -133,16 +145,13 @@ export class Packages {
     }
 
     installNew() {
-        this.installpackages.classList.remove("closed");
-        document.getElementById("name_input").focus();
-    }
-
-    cancelInstallPackage() {
-        this.installpackages.classList.add("closed");
+        this.showInstallPackages();
     }
 
     installPackage() {
         let dependency = "";
+        this.isBusy = true;
+        this.busyText = `installing package ${this.model.name}`;
 
         if (this.model.packageType == "npm") {
             dependency = this.model.dependency == "dev dependency" ? "--save-dev" : "--save";
@@ -150,7 +159,14 @@ export class Packages {
 
         const installCommand = `${this.model.packageType} install ${this.model.name} ${dependency}`;
 
-        this.taskRunner.execCommand({command: installCommand});
-        this.cancelInstallPackage();
+        this.taskRunner.execCommand({command: installCommand})
+            .then(_ => {
+                this.isBusy = false;
+                this.items = this.webProject.packageJson.getInstalledPackages();
+            });
+    }
+
+    updatePackageList() {
+
     }
 }

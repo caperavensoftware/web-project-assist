@@ -14,7 +14,11 @@ export class PackageJson {
 
     load(folder) {
         this.folder = folder;
-        const path = `${folder}/package.json`;
+        return this.loadPackageFile();
+    }
+
+    loadPackageFile() {
+        const path = `${this.folder}/package.json`;
         const exists = fs.existsSync(path);
 
         if (!exists) {
@@ -30,6 +34,8 @@ export class PackageJson {
     }
 
     getInstalledPackages() {
+        this.loadPackageFile();
+
         const result = [];
 
         if (this.packageObject.devDependencies) {

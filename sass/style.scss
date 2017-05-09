@@ -202,3 +202,11 @@ h3 {
 .align-right {
   justify-content: flex-end;
 }
+
+ux-dialog-container {
+  z-index: 100000;
+}
+
+ux-dialog-body h2 {
+  margin-bottom: $default-padding;
+}

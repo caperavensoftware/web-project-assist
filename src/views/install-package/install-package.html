@@ -1,0 +1,31 @@
+<template>
+    <ux-dialog>
+        <ux-dialog-body>
+            <h2>What package do you want to install?</h2>
+
+            <input-composite label="Package">
+                <input attach-focus="true" value.bind="model.name" />
+            </input-composite>
+
+            <input-composite label="Package Type">
+                <select value.bind="model.packageType">
+                    <option id="npm">npm</option>
+                    <option id="jspm">jspm</option>
+                </select>
+            </input-composite>
+
+            <input-composite label="Dependency">
+                <select value.bind="model.dependency">
+                    <option id="1">dev dependency</option>
+                    <option id="2">app dependency</option>
+                </select>
+            </input-composite>
+
+        </ux-dialog-body>
+
+        <ux-dialog-footer>
+            <button click.trigger="controller.cancel()">Cancel</button>
+            <button click.trigger="controller.ok(model)">Ok</button>
+        </ux-dialog-footer>
+    </ux-dialog>
+</template>

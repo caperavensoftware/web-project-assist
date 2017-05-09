@@ -94,7 +94,7 @@ System.config({
   map: {
     "aurelia-binding": "npm:aurelia-binding@1.2.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@2.1.1",
-    "aurelia-dialog": "npm:aurelia-dialog@1.0.0-beta.3.0.1",
+    "aurelia-dialog": "npm:aurelia-dialog@1.0.0-rc.1.0.3",
     "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
     "aurelia-framework": "npm:aurelia-framework@1.1.2",
     "aurelia-pal-browser": "npm:aurelia-pal-browser@1.2.1",
@@ -191,7 +191,7 @@ System.config({
       "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.3.0"
     },
-    "npm:aurelia-dialog@1.0.0-beta.3.0.1": {
+    "npm:aurelia-dialog@1.0.0-rc.1.0.3": {
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
       "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.3.0",
