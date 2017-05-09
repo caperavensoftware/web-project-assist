@@ -3,16 +3,25 @@ const fs = require("fs");
 
 export class TaskRunner {
     constructor(path, eventEmitter) {
-        this.path = path;
+        this.setPath(path);
         this.eventEmitter = eventEmitter;
-        process.env.PATH += `;${this.path}`;
-        process.env.PATH += `;${this.path}/node_modules/.bin/`;
     }
 
     dispose() {
         process.env.PATH -= `;${this.path}`;
         process.env.PATH -= `;${this.path}/node_modules/.bin/`;
         this.eventEmitter = null;
+    }
+
+    setPath(path) {
+        if (this.path) {
+            process.env.PATH -= `;${this.path}`;
+            process.env.PATH -= `;${this.path}/node_modules/.bin/`;
+        }
+
+        this.path = path;
+        process.env.PATH += `;${this.path}`;
+        process.env.PATH += `;${this.path}/node_modules/.bin/`;
     }
 
     runTasks(tasksJson, taskProcessId) {
