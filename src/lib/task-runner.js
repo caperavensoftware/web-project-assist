@@ -5,11 +5,13 @@ export class TaskRunner {
     constructor(path, eventEmitter) {
         this.path = path;
         this.eventEmitter = eventEmitter;
-        process.env.PATH += `:${this.path}`;
+        process.env.PATH += `;${this.path}`;
+        process.env.PATH += `;${this.path}/node_modules/.bin/`;
     }
 
     dispose() {
-        process.env.PATH -= `:${this.path}`;
+        process.env.PATH -= `;${this.path}`;
+        process.env.PATH -= `;${this.path}/node_modules/.bin/`;
         this.eventEmitter = null;
     }
 
@@ -88,10 +90,12 @@ export class TaskRunner {
     }
 
     spawnCommand(task) {
-        return new Promise((resolve, reject) => {
-            const command = `cd "${this.path}/node_modules/.bin/" && ${task.command}`;
+        console.log(process.env.PATH);
 
-            const gulp = childProcess.spawn(process.env.SHELL, ['-c', command]);
+        return new Promise((resolve, reject) => {
+            const command = task.command;
+
+            const gulp = childProcess.spawn(process.env.SHELL || 'powershell', ['-c', command]);
 
             this.eventEmitter.emit("process-running", {
                 id: this.taskProcessId,
