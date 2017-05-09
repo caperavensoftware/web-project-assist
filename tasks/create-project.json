@@ -14,6 +14,10 @@
       "description": "4. install jspm"
     },
     {
+      "command": "npm install aurelia-event-aggregator --save-dev",
+      "description": "4. install jspm"
+    },
+    {
       "task": "template",
       "source": "project/gulpfile.js.template",
       "target": "gulpfile.js",
