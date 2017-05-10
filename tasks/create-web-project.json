@@ -1,0 +1,80 @@
+{
+  "name": "Create Web Project",
+  "tasks": [
+    {
+      "command": "npm init -y",
+      "description": "initialize npm"
+    },
+    {
+      "command": "npm install build-utilities --save-dev",
+      "description": "install build-utilities, this make take some time"
+    },
+    {
+      "command": "npm install jspm --save-dev",
+      "description": "install jspm"
+    },
+    {
+      "command": "npm install aurelia-event-aggregator --save-dev",
+      "description": "install jspm"
+    },
+    {
+      "command": "jspm install aurelia-dependency-injection",
+      "description": "install aurelia-dependency-injection"
+    },
+    {
+      "command": "jspm install npm:pragma-views",
+      "description": "install pragma-views"
+    },
+    {
+      "command": "jspm install npm:pragma-menu",
+      "description": "install pragma-menu"
+    },
+    {
+      "task": "template",
+      "source": "project/gulpfile.js.template",
+      "target": "gulpfile.js",
+      "description": "set up gulpfile"
+    },
+    {
+      "task": "template",
+      "source": "project/icons.html.template",
+      "target": "src/components/icons/icons.html",
+      "description": "set icons html file"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/app/app.html.template",
+      "target": "src/app.html",
+      "description": "set app html"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/app/app.js.template",
+      "target": "src/app.js",
+      "description": "set app js"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/app/menu-items.js.template",
+      "target": "src/menu-items.js",
+      "description": "set menu-items"
+    },
+    {
+      "command": "gulp init-project",
+      "description": "initialize project"
+    },
+
+    {
+      "command": "git init",
+      "description": "initialize git"
+    },
+    {
+      "command": "git add -A && git commit -m 'Initial'",
+      "description": "add git files"
+    },
+    {
+      "command": "gulp build:all",
+      "description": "building project"
+    }
+  ]
+}

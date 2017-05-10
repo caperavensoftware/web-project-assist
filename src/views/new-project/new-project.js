@@ -36,6 +36,18 @@ export class NewProject extends ViewBase {
         this.taskRunner.runTasks(taskJson);
     }
 
+    createWebProject() {
+        console.log("create web project");
+    }
+
+    createCordovaProject() {
+        console.log("create cordova project");
+    }
+
+    createElectronProject() {
+        console.log("create electron project");
+    }
+
     cancel() {
         this.router.navigateToRoute("welcome");
     }
