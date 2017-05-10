@@ -1,7 +1,6 @@
 {
   "name": "@pragmaproducts/web-project-assist",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
@@ -49,5 +48,17 @@
     "fix-path": "^2.1.0",
     "mkdirp": "^0.5.1",
     "svgo": "^0.7.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caperavensoftware/web-project-assist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/caperavensoftware/web-project-assist/issues"
+  },
+  "homepage": "https://github.com/caperavensoftware/web-project-assist#readme",
+  "description": ""
 }

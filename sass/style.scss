@@ -210,3 +210,7 @@ ux-dialog-container {
 ux-dialog-body h2 {
   margin-bottom: $default-padding;
 }
+
+.suppressed {
+  opacity: 0.5;
+}

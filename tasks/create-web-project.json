@@ -26,6 +26,10 @@
       "description": "install pragma-views"
     },
     {
+      "command": "gulp init-project",
+      "description": "initialize project"
+    },
+    {
       "command": "jspm install npm:pragma-menu",
       "description": "install pragma-menu"
     },
@@ -59,11 +63,6 @@
       "target": "src/menu-items.js",
       "description": "set menu-items"
     },
-    {
-      "command": "gulp init-project",
-      "description": "initialize project"
-    },
-
     {
       "command": "git init",
       "description": "initialize git"

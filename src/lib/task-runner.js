@@ -91,6 +91,11 @@ export class TaskRunner {
                 console.log(stdout);
             });
 
+            ls.stdout.on('data', data => {
+                this.eventEmitter.emit("progress", data);
+                console.log(data);
+            });
+
             ls.on('close', _ => {
                 console.log(`done with: ${task.description}`);
                 resolve();
@@ -99,8 +104,6 @@ export class TaskRunner {
     }
 
     spawnCommand(task) {
-        console.log(process.env.PATH);
-
         return new Promise((resolve, reject) => {
             const command = task.command;
 
@@ -111,17 +114,17 @@ export class TaskRunner {
                 process: gulp
             });
 
-            gulp.stdout.on('data', (data) => {
+            gulp.stdout.on('data', data => {
                 console.log(`stdout: ${data}`);
                 this.eventEmitter.emit("progress", data);
             });
 
-            gulp.stderr.on('data', (data) => {
+            gulp.stderr.on('data', data => {
               console.log(`stderr: ${data}`);
               reject(data);
             });
 
-            gulp.on('close', (code) => {
+            gulp.on('close', code => {
               console.log(`child process exited with code ${code}`);
               resolve();
             });

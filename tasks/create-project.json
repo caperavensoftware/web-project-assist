@@ -14,14 +14,6 @@
       "description": "install jspm"
     },
     {
-      "command": "npm install aurelia-event-aggregator --save-dev",
-      "description": "install jspm"
-    },
-    {
-      "command": "jspm install aurelia-dependency-injection",
-      "description": "install aurelia-dependency-injection"
-    },
-    {
       "task": "template",
       "source": "project/gulpfile.js.template",
       "target": "gulpfile.js",
@@ -30,6 +22,14 @@
     {
       "command": "gulp init-project",
       "description": "initialize project"
+    },
+    {
+      "command": "npm install aurelia-event-aggregator --save-dev",
+      "description": "install aurelia-event-aggregator"
+    },
+    {
+      "command": "jspm install aurelia-dependency-injection",
+      "description": "install aurelia-dependency-injection"
     },
     {
       "command": "git init",
