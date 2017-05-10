@@ -3,41 +3,45 @@
   "tasks": [
     {
       "command": "npm init -y",
-      "description": "1. initialize npm"
+      "description": "initialize npm"
     },
     {
       "command": "npm install build-utilities --save-dev",
-      "description": "3. install build-utilities, this make take some time"
+      "description": "install build-utilities, this make take some time"
     },
     {
       "command": "npm install jspm --save-dev",
-      "description": "4. install jspm"
+      "description": "install jspm"
     },
     {
       "command": "npm install aurelia-event-aggregator --save-dev",
-      "description": "4. install jspm"
+      "description": "install jspm"
+    },
+    {
+      "command": "jspm install aurelia-dependency-injection",
+      "description": "install aurelia-dependency-injection"
     },
     {
       "task": "template",
       "source": "project/gulpfile.js.template",
       "target": "gulpfile.js",
-      "description": "5. set up gulpfile"
+      "description": "set up gulpfile"
     },
     {
       "command": "gulp init-project",
-      "description": "6. initialize project"
+      "description": "initialize project"
     },
     {
       "command": "git init",
-      "description": "7. initialize git"
+      "description": "initialize git"
     },
     {
       "command": "git add -A && git commit -m 'Initial'",
-      "description": "8. add git files"
+      "description": "add git files"
     },
     {
       "command": "gulp build:all",
-      "description": "9. building project"
+      "description": "building project"
     }
   ]
 }
