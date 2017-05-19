@@ -15,7 +15,7 @@
     },
     {
       "command": "npm install aurelia-event-aggregator --save-dev",
-      "description": "install jspm"
+      "description": "install aurelia-event-aggregator"
     },
     {
       "command": "jspm install aurelia-dependency-injection",

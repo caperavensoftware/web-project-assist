@@ -1,6 +1,7 @@
 import {ViewBase} from './../view-base';
 import {TaskRunner} from './../../lib/task-runner';
-import taskJson from './../../../../tasks/create-project.json!text';
+import createProjectJson from './../../../../tasks/create-project.json!text';
+import createWebProjectJson from './../../../../tasks/create-web-project.json!text';
 
 const EventEmitter = require('events');
 
@@ -36,11 +37,12 @@ export class NewProject extends ViewBase {
 
     createProject() {
         this.processRunning = true;
-        this.taskRunner.runTasks(taskJson);
+        this.taskRunner.runTasks(createProjectJson);
     }
 
     createWebProject() {
-        console.log("create web project");
+        this.processRunning = true;
+        this.taskRunner.runTasks(createWebProjectJson);
     }
 
     createCordovaProject() {
