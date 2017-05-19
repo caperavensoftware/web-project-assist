@@ -1,5 +1,7 @@
 import {ViewBase} from './../view-base';
 import {generateClass, generateComponent, generateView} from './../../lib/code-gen';
+import {DynamicSchemaItem, DynamicSchemaFieldItem, DynamicDialog} from 'pragma-views';
+import {DialogService} from 'aurelia-dialog';
 import assistHtml from './project-assist.html!text';
 import {TaskRunner} from './../../lib/task-runner';
 import buildAll from './../../../../tasks/build-all.json!text';
@@ -7,17 +9,46 @@ import runServer from './../../../../tasks/run-server.json!text';
 
 const EventEmitter = require('events');
 
-export class Project extends ViewBase {
-    newItem = {
-        name: "",
-        path: "lib"
-    };
+const schemas = {
+    createComponent : {
+        title: "New Class",
+        details: [
+            new DynamicSchemaItem("Name", "name", new DynamicSchemaFieldItem("string", "50")),
+            new DynamicSchemaItem("Path", "path", new DynamicSchemaFieldItem("string", "50")),
+        ],
+        model: {
+            name: "",
+            path: "lib"
+        }
+    },
 
+    createComponent : {
+        title: "New Component",
+        details: [
+            new DynamicSchemaItem("Name", "name", new DynamicSchemaFieldItem("string", "50"))
+        ],
+        model: {
+            name: "",
+        }
+    },
+
+    createView : {
+        title: "New View",
+        details: [
+            new DynamicSchemaItem("Name", "name", new DynamicSchemaFieldItem("string", "50"))
+        ],
+        model: {
+            name: "",
+        }
+    }
+};
+
+export class Project extends ViewBase {
     progressText;
     serverActionCaption;
 
-    constructor(element, webProject, router, eventAggregator) {
-        super(element, webProject, router, eventAggregator);
+    constructor(element, webProject, router, eventAggregator, dialogService) {
+        super(element, webProject, router, eventAggregator, dialogService);
 
         this.model = new ProjectModel(this.webProject);
         this.webProject.isMenuVisible = true;
@@ -58,63 +89,48 @@ export class Project extends ViewBase {
     }
 
     createClass() {
-        this.createComponentElement.classList.add("closed");
-        this.createClassElement.classList.remove("closed");
-        this.createViewElement.classList.add("closed");
-
-        this.edtCreateClass.focus();
+        this.dialogService.open({viewModel: DynamicDialog, model: schemas.createComponent})
+            .whenClosed(resposne => {
+                if (!resposne.wasCancelled) {
+                    this.performCreateClass(schema.model.name, schemas.createComponent.model.path);
+                }
+            });
     }
 
-    hideClass() {
-        this.createClassElement.classList.add("closed");
-    }
-
-    performCreateClass() {
-        if (this.newItem.name.length == 0) {
+    performCreateClass(name, path) {
+        if (name.length == 0) {
             return;
         }
 
-        generateClass(this.newItem.name, this.newItem.path, this.webProject.currentProjectPath, this.taskRunner);
-        this.newItem.name = "";
-        this.hideClass();
+        generateClass(name, path, this.webProject.currentProjectPath, this.taskRunner);
         alert("class created");
     }
 
     createComponent() {
-        this.createComponentElement.classList.remove("closed");
-        this.createClassElement.classList.add("closed");
-        this.createViewElement.classList.add("closed");
-
-        this.edtCreateComponent.focus();
+        this.dialogService.open({viewModel: DynamicDialog, model: schemas.createComponent})
+            .whenClosed(resposne => {
+                if (!resposne.wasCancelled) {
+                    this.performCreateComponent(schemas.createComponent.model.name);
+                }
+            });
     }
 
-    performCreateComponent() {
-        generateComponent(this.newItem.name, this.webProject.currentProjectPath, this.taskRunner);
-        this.newItem.name = "";
-        this.hideComponent();
+    performCreateComponent(name) {
+        generateComponent(name, this.webProject.currentProjectPath, this.taskRunner);
         alert("component created");
     }
 
-    hideComponent() {
-        this.createComponentElement.classList.add("closed");
-    }
-
     createView() {
-        this.createComponentElement.classList.add("closed");
-        this.createClassElement.classList.add("closed");
-        this.createViewElement.classList.remove("closed");
-
-        this.edtCreateView.focus();
+        this.dialogService.open({viewModel: DynamicDialog, model: schemas.createView})
+            .whenClosed(resposne => {
+                if (!resposne.wasCancelled) {
+                    this.performCreateView(schemas.createView.model.name);
+                }
+            });
     }
 
-    hideView() {
-        this.createViewElement.classList.add("closed");
-    }
-
-    performCreateView() {
-        generateView(this.newItem.name, this.webProject.currentProjectPath, this.taskRunner);
-        this.newItem.name = "";
-        this.hideView();
+    performCreateView(name) {
+        generateView(name, this.webProject.currentProjectPath, this.taskRunner);
         alert("view created");
     }
 

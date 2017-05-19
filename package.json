@@ -28,6 +28,9 @@
     "electron-packager": "^8.7.0"
   },
   "jspm": {
+    "directories": {
+      "test": "test"
+    },
     "dependencies": {
       "aurelia-binding": "npm:aurelia-binding@^1.2.1",
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^2.1.1",
@@ -36,7 +39,7 @@
       "aurelia-framework": "npm:aurelia-framework@^1.1.2",
       "pragma-menu": "npm:pragma-menu@^1.0.16",
       "pragma-tabsheet": "npm:pragma-tabsheet@^1.0.23",
-      "pragma-views": "npm:pragma-views@^0.0.11",
+      "pragma-views": "npm:pragma-views@^0.0.27",
       "svgo": "npm:svgo@^0.7.2",
       "text": "github:systemjs/plugin-text@^0.0.9"
     },

@@ -13,23 +13,6 @@
         </input-composite>
     </div>
 
-    <div id="createClass" ref="createClassElement" class="closed">
-        <div class="group">
-            <h3>Create Class</h3>
-            <input-composite id="itemName" label="Name" isRequired="true">
-                <input type="text" value.bind="newItem.name" ref="edtCreateClass"/>
-            </input-composite>
-
-            <input-composite id="itemName" label="Path" isRequired="true">
-                <input type="text" value.bind="newItem.path" />
-            </input-composite>
-
-            <div class="toolbar">
-                <button click.delegate="hideClass()">Cancel</button>
-                <button click.delegate="performCreateClass()" class="primary-action">Create</button>
-            </div>
-        </div>
-    </div>
 
     <div id="createComponent" ref="createComponentElement" class="closed">
         <div class="group">

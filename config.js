@@ -98,9 +98,9 @@ System.config({
     "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
     "aurelia-framework": "npm:aurelia-framework@1.1.2",
     "aurelia-pal-browser": "npm:aurelia-pal-browser@1.2.1",
-    "pragma-menu": "npm:pragma-menu@1.0.16",
+    "pragma-menu": "npm:pragma-menu@1.0.17",
     "pragma-tabsheet": "npm:pragma-tabsheet@1.0.23",
-    "pragma-views": "npm:pragma-views@0.0.11",
+    "pragma-views": "npm:pragma-views@0.0.27",
     "svgo": "npm:svgo@0.7.2",
     "text": "github:systemjs/plugin-text@0.0.9",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -363,16 +363,17 @@ System.config({
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:pragma-menu@1.0.17": {
+      "aurelia-bootstrapper": "npm:aurelia-bootstrapper@2.1.1",
+      "aurelia-framework": "npm:aurelia-framework@1.1.2"
+    },
     "npm:pragma-tabsheet@1.0.23": {
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.1",
       "aurelia-framework": "npm:aurelia-framework@1.1.2",
       "aurelia-polyfills": "npm:aurelia-polyfills@1.2.1"
     },
-    "npm:pragma-views@0.0.11": {
-      "aurelia-bootstrapper": "npm:aurelia-bootstrapper@2.1.1",
-      "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
-      "aurelia-framework": "npm:aurelia-framework@1.1.2",
-      "pragma-menu": "npm:pragma-menu@1.0.16"
+    "npm:pragma-views@0.0.27": {
+      "pragma-menu": "npm:pragma-menu@1.0.17"
     },
     "npm:process@0.11.9": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

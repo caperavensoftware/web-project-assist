@@ -12,6 +12,7 @@ export function configure(aurelia) {
                 'pragma-views/components/menu/menu',
                 'pragma-views/components/assistant/assistant',
                 'pragma-views/components/input-composite/input-composite',
+                'pragma-views/dialogs/dynamic-dialog/dynamic-dialog',
                 'components/pragma-editor/pragma-editor',
                 'components/file-list/file-list',
                 'components/checkbox.html'
