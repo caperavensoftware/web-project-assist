@@ -14,6 +14,16 @@
       "description": "install jspm"
     },
     {
+      "task": "template",
+      "source": "project/gulpfile.js.template",
+      "target": "gulpfile.js",
+      "description": "set up gulpfile"
+    },
+    {
+      "command": "gulp init-project",
+      "description": "initialize project"
+    },
+    {
       "command": "npm install aurelia-event-aggregator --save-dev",
       "description": "install aurelia-event-aggregator"
     },
@@ -24,10 +34,6 @@
     {
       "command": "jspm install npm:pragma-views",
       "description": "install pragma-views"
-    },
-    {
-      "command": "gulp init-project",
-      "description": "initialize project"
     },
     {
       "command": "jspm install npm:pragma-menu",
