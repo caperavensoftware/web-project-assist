@@ -77,11 +77,16 @@ export class Project extends ViewBase {
     detached() {
         this.killServer();
         this.doneHandler = null;
+
+        this.taskRunner.dispose();
         this.taskRunner = null;
+
         this.model = null;
         this.webProject = null;
         this.progressHandler = null;
         this.processRunningHandler = null;
+
+        this.eventEmitter = null;
     }
 
     sayHello() {

@@ -1,6 +1,7 @@
 const childProcess = require("child_process");
 const fs = require("fs");
 const mkdirp = require("mkdirp");
+const fixPath = require('fix-path');
 
 export class TaskRunner {
     constructor(path, eventEmitter) {
@@ -15,6 +16,8 @@ export class TaskRunner {
     }
 
     setPath(path) {
+        fixPath();
+
         if (this.path) {
             process.env.PATH -= `;${this.path}`;
             process.env.PATH -= `;${this.path}/node_modules/.bin/`;
@@ -23,6 +26,20 @@ export class TaskRunner {
         this.path = path;
         process.env.PATH += `;${this.path}`;
         process.env.PATH += `;${this.path}/node_modules/.bin/`;
+    }
+
+    ensurePath() {
+        if (process.env.PATH == "NaN") {
+            console.warn(`fixing path to: ${this.path}`);
+            fixPath();
+
+            if (this.path) {
+                process.env.PATH += `;${this.path}`;
+                process.env.PATH += `;${this.path}/node_modules/.bin/`;
+            }
+
+            console.warn(`environment path set to: ${process.env.PATH}`);
+        }
     }
 
     runTasks(tasksJson, taskProcessId) {
@@ -65,6 +82,7 @@ export class TaskRunner {
     }
 
     runCommand(task) {
+        this.ensurePath();
         this.eventEmitter.emit("description", task.description);
 
         if (task.command.indexOf("gulp ") > -1) {
@@ -76,6 +94,7 @@ export class TaskRunner {
     }
 
     execCommand(task) {
+        this.ensurePath();
         return new Promise((resolve, reject) => {
             const options = {
                 cwd: this.path,
@@ -105,6 +124,7 @@ export class TaskRunner {
     }
 
     spawnCommand(task) {
+        this.ensurePath();
         return new Promise((resolve, reject) => {
             const command = task.command;
 
@@ -133,6 +153,7 @@ export class TaskRunner {
     }
 
     runTask(task) {
+        this.ensurePath();
         if (task.task == "template") {
             const source = `${global.applicationPath}/templates/${task.source}`;
             const target = `${this.path}/${task.target}`;

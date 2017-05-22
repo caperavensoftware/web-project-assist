@@ -43,6 +43,7 @@ export class Packages {
         this.eventEmitter = new EventEmitter();
         this.eventEmitter.on("description", this.describeHanddler);
         this.eventEmitter.on("done", this.doneHandler);
+
         this.taskRunner = new TaskRunner(this.webProject.currentProjectPath, this.eventEmitter);
 
         this.model = {
