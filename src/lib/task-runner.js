@@ -141,6 +141,8 @@ export class TaskRunner {
     }
 
     saveTemplateTo(fromFile, toFile, description) {
+        console.log(`save template from: ${fromFile}, to: ${toFile}`);
+
         this.eventEmitter.emit("description", description);
 
         return this.ensureFolder(toFile)

@@ -10,7 +10,7 @@ import runServer from './../../../../tasks/run-server.json!text';
 const EventEmitter = require('events');
 
 const schemas = {
-    createComponent : {
+    createClass : {
         title: "New Class",
         details: [
             new DynamicSchemaItem("Name", "name", new DynamicSchemaFieldItem("string", "50")),
@@ -89,10 +89,11 @@ export class Project extends ViewBase {
     }
 
     createClass() {
-        this.dialogService.open({viewModel: DynamicDialog, model: schemas.createComponent})
+        this.dialogService.open({viewModel: DynamicDialog, model: schemas.createClass})
             .whenClosed(resposne => {
                 if (!resposne.wasCancelled) {
-                    this.performCreateClass(schema.model.name, schemas.createComponent.model.path);
+                    this.performCreateClass(schemas.createClass.model.name, schemas.createClass.model.path);
+                    schemas.createClass.model.name = "";
                 }
             });
     }
@@ -111,6 +112,7 @@ export class Project extends ViewBase {
             .whenClosed(resposne => {
                 if (!resposne.wasCancelled) {
                     this.performCreateComponent(schemas.createComponent.model.name);
+                    schemas.createComponent.model.name = "";
                 }
             });
     }
@@ -125,6 +127,7 @@ export class Project extends ViewBase {
             .whenClosed(resposne => {
                 if (!resposne.wasCancelled) {
                     this.performCreateView(schemas.createView.model.name);
+                    schemas.createView.model.name = "";
                 }
             });
     }

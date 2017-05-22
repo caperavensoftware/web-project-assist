@@ -18,7 +18,7 @@
                 <input type="checkbox" checked.bind="model.isNpmClient" />
             </input-composite>
 
-            <input-composite label="Dependency">
+            <input-composite label="Dependency" if.bind="model.packageType == 'npm'">
                 <select value.bind="model.dependency">
                     <option id="1">dev dependency</option>
                     <option id="2">app dependency</option>
