@@ -64,7 +64,7 @@ export class PackageJson {
             const s = value.split("^");
             const version = s.length == 1 ? s[0] : s[1];
 
-            array.push(new PackageItem(name, version, type))
+            array.push(new PackageItem(name, version.trim(), type))
         }
     }
 

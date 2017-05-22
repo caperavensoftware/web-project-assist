@@ -44,10 +44,6 @@
       "description": "install aurelia-dependency-injection"
     },
     {
-      "command": "jspm install npm:pragma-views",
-      "description": "install pragma-views"
-    },
-    {
       "command": "jspm install npm:pragma-menu",
       "description": "install pragma-menu"
     },
@@ -84,24 +80,6 @@
       "source": "project/web-project/index.html.template",
       "target": "index.html",
       "description": "set index"
-    },
-    {
-      "task": "template",
-      "source": "project/web-project/scss/styles.scss.template",
-      "target": "scss/styles.scss",
-      "description": "set styles scss"
-    },
-    {
-      "task": "template",
-      "source": "project/web-project/scss/mobile.scss.template",
-      "target": "scss/mobile.scss",
-      "description": "set mobile.scss"
-    },
-    {
-      "task": "template",
-      "source": "project/web-project/scss/desktop.scss.template",
-      "target": "scss/desktop.scss",
-      "description": "set desktop scss"
     },
     {
       "task": "template",

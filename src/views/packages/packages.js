@@ -1,6 +1,9 @@
 import {bindable, inject} from "aurelia-framework";
 import {EventAggregator} from 'aurelia-event-aggregator';
 import template from './../../../../screen-templates/packages.json!text';
+import stylesTemplate from './../../../../templates/project/scss/styles.scss.template!text';
+import desktopTemplate from './../../../../templates/project/scss/desktop.scss.template!text';
+import mobileTemplate from './../../../../templates/project/scss/mobile.scss.template!text';
 import {DynamicViewLoader} from 'pragma-views/lib/dynamic-view-loader';
 import {TemplateParser} from 'pragma-views/lib/template-parser';
 import {WebProject} from './../../lib/web-project';
@@ -10,6 +13,7 @@ import {DialogService} from 'aurelia-dialog';
 import {InstallPackage} from './../install-package/install-package';
 
 const EventEmitter = require('events');
+const fs = require('fs');
 
 @inject(TemplateParser, DynamicViewLoader, EventAggregator, WebProject, DialogService)
 export class Packages {
@@ -168,7 +172,24 @@ export class Packages {
             });
     }
 
-    updatePackageList() {
+    installPragmaViews() {
+        this.isBusy = true;
+        this.busyText = 'installing pragma-views';
 
+        this.taskRunner.execCommand({command: "jspm install npm:pragma-views"})
+            .then(_ => {
+                this.isBusy = false;
+                this.items = this.webProject.packageJson.getInstalledPackages();
+                const result = this.items.find(item => item.name == "pragma-views");
+
+                this.saveStyle(`${this.webProject.currentProjectPath}/sass/style.scss`, stylesTemplate, result.version);
+                this.saveStyle(`${this.webProject.currentProjectPath}/sass/desktop.scss`, desktopTemplate, result.version);
+                this.saveStyle(`${this.webProject.currentProjectPath}/sass/mobile.scss`, mobileTemplate, result.version);
+            });
+    }
+
+    saveStyle(file, template, version) {
+        const result = template.split("__version__").join(version);
+        fs.writeFileSync(file, result);
     }
 }
