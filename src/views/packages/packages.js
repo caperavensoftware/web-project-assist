@@ -176,7 +176,7 @@ export class Packages {
         this.isBusy = true;
         this.busyText = 'installing pragma-views';
 
-        this.taskRunner.execCommand({command: "jspm install npm:pragma-views"})
+        this.taskRunner.execCommand({command: "jspm install npm:pragma-views", description: "installing pragma-views"})
             .then(_ => {
                 this.isBusy = false;
                 this.items = this.webProject.packageJson.getInstalledPackages();
@@ -185,6 +185,8 @@ export class Packages {
                 this.saveStyle(`${this.webProject.currentProjectPath}/sass/style.scss`, stylesTemplate, result.version);
                 this.saveStyle(`${this.webProject.currentProjectPath}/sass/desktop.scss`, desktopTemplate, result.version);
                 this.saveStyle(`${this.webProject.currentProjectPath}/sass/mobile.scss`, mobileTemplate, result.version);
+
+                this.taskRunner.execCommand({command: 'git add -A'});
             });
     }
 
