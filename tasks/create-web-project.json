@@ -28,6 +28,18 @@
       "description": "install aurelia-event-aggregator"
     },
     {
+      "command": "jspm install aurelia-event-aggregator",
+      "description": "install aurelia-event-aggregator"
+    },
+    {
+      "command": "npm install aurelia-dialog --save-dev",
+      "description": "install aurelia-dialog"
+    },
+    {
+      "command": "jspm install aurelia-dialog",
+      "description": "install aurelia-dialog"
+    },
+    {
       "command": "jspm install aurelia-dependency-injection",
       "description": "install aurelia-dependency-injection"
     },
@@ -40,10 +52,8 @@
       "description": "install pragma-menu"
     },
     {
-      "task": "template",
-      "source": "project/gulpfile.js.template",
-      "target": "gulpfile.js",
-      "description": "set up gulpfile"
+      "command": "jspm install npm:pragma-tabsheet",
+      "description": "install pragma-menu"
     },
     {
       "task": "template",
@@ -68,6 +78,36 @@
       "source": "project/web-project/app/menu-items.js.template",
       "target": "src/menu-items.js",
       "description": "set menu-items"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/index.html.template",
+      "target": "index.html",
+      "description": "set index"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/scss/styles.scss.template",
+      "target": "scss/styles.scss",
+      "description": "set styles scss"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/scss/mobile.scss.template",
+      "target": "scss/mobile.scss",
+      "description": "set mobile.scss"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/scss/desktop.scss.template",
+      "target": "scss/desktop.scss",
+      "description": "set desktop scss"
+    },
+    {
+      "task": "template",
+      "source": "project/web-project/main.js.template",
+      "target": "src/main.js",
+      "description": "set main js"
     },
     {
       "command": "git init",

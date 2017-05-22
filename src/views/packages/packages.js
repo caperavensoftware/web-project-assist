@@ -44,7 +44,8 @@ export class Packages {
         this.model = {
             name: "",
             packageType: "npm",
-            dependency: "dev dependency"
+            dependency: "dev dependency",
+            isNpmClient: false
         };
     }
 
@@ -157,7 +158,8 @@ export class Packages {
             dependency = this.model.dependency == "dev dependency" ? "--save-dev" : "--save";
         }
 
-        const installCommand = `${this.model.packageType} install ${this.model.name} ${dependency}`;
+        const prefix = (this.model.isNpmClient && this.model.packageType == "jspm") ? "npm:" : "";
+        const installCommand = `${this.model.packageType} install ${prefix}${this.model.name} ${dependency}`;
 
         this.taskRunner.execCommand({command: installCommand})
             .then(_ => {

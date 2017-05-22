@@ -1,0 +1,39 @@
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/normalize';
+@import './../jspm_packages/npm/pragma-menu@1.0.17/pragma-menu.scss';
+
+// Required utility css
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/variables';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/colors';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/mixins';
+
+// Application spesific css
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/app';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/states';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/layout';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/typography';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/pragma-tabsheet';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/group';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/input-composite';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/input';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/textarea';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/select';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/master-detail';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/list';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/card';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/md-card';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/buttons';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/layout-table';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/switch';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/menu';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/icons';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/assistant';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/hr';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/form-search';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/ul';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/pragma-messages';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/pragma-grid';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/toolbar';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/pragma-options-toolbar';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/pragma-dropdown-menu';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/dialogs';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/lib/pragma-menu';

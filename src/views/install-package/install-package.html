@@ -14,6 +14,10 @@
                 </select>
             </input-composite>
 
+            <input-composite label="Is npm package" if.bind="model.packageType == 'jspm'">
+                <input type="checkbox" checked.bind="model.isNpmClient" />
+            </input-composite>
+
             <input-composite label="Dependency">
                 <select value.bind="model.dependency">
                     <option id="1">dev dependency</option>

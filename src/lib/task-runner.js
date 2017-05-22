@@ -1,5 +1,6 @@
 const childProcess = require("child_process");
 const fs = require("fs");
+const mkdirp = require("mkdirp");
 
 export class TaskRunner {
     constructor(path, eventEmitter) {
@@ -140,12 +141,23 @@ export class TaskRunner {
     }
 
     saveTemplateTo(fromFile, toFile, description) {
-        return new Promise((resolve, reject) => {
-            this.eventEmitter.emit("description", description);
-            fs.createReadStream(fromFile)
-                .pipe(fs.createWriteStream(toFile).on("close", _ => {
-                    resolve();
-                }));
+        this.eventEmitter.emit("description", description);
+
+        return this.ensureFolder(toFile)
+            .then(_ => {
+                return new Promise((resolve, reject) => {
+                    fs.createReadStream(fromFile)
+                        .pipe(fs.createWriteStream(toFile).on("close", _ => {
+                            resolve();
+                        }));
+                })
+            })
+    }
+
+    ensureFolder(toFile) {
+        return new Promise(resolve => {
+            const folderPath = require('path').dirname(toFile);
+            mkdirp(folderPath, _ => resolve());
         })
     }
 }

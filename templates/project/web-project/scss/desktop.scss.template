@@ -1,0 +1,7 @@
+// Desktop
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/desktop/input-composite';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/desktop/app';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/desktop/master-detail';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/desktop/menu';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/desktop/assistant';
+@import './../jspm_packages/npm/pragma-views@0.0.27/scss/desktop/pragma-dropdown-menu';

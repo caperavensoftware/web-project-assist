@@ -32,6 +32,12 @@
       "description": "install aurelia-dependency-injection"
     },
     {
+      "task": "template",
+      "source": "project/icons.html.template",
+      "target": "src/components/icons/icons.html",
+      "description": "set icons html file"
+    },
+    {
       "command": "git init",
       "description": "initialize git"
     },
