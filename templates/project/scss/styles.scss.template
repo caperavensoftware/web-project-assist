@@ -37,3 +37,4 @@
 @import './../jspm_packages/npm/pragma-views@__version__/scss/lib/pragma-dropdown-menu';
 @import './../jspm_packages/npm/pragma-views@__version__/scss/lib/dialogs';
 @import './../jspm_packages/npm/pragma-views@__version__/scss/lib/pragma-menu';
+@import './../jspm_packages/npm/pragma-views@__version__/scss/lib/master-list-container';
